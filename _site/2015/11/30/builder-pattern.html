@@ -1,0 +1,69 @@
+<p>Most of the time when you create a Java bean you add all properties as private fields and create a public getter and setter for each field. In this post I will tell you why this isn’t good practices and how you can make it better.</p>
+
+<h2 id="why-getters-and-setters-are-most-of-the-time-not-necessary">Why getters and setters are most of the time not necessary?</h2>
+
+<p>Most getters and setters will just return the value they are created for. This results in huge files with a lot of unnecessary code. The benefit of such getters and setters is not really given. It just makes the code less readable.</p>
+
+<p>A much better approach is to make all fields publicly available so that they can be accessed from outside. To make the beans more robust you should also implement a builder for each bean.</p>
+
+<h2 id="whats-the-builder-pattern">What’s the builder pattern?</h2>
+
+<p>A builder can be used to configure a bean and then return a final version of it. The huge benefit of this pattern is that your beans get immutable. This will prevent developers to set values after a bean was created. If this has be done, a new bean has to be created.</p>
+
+<p>The builder for a certain bean contains private instances of all fields the bean to create also contains. They are typically exposed them using a fluent interface.</p>
+
+<p>This way the builder can be configured in a very readable way. When everything is done the actual bean can be built using the build method of the builder.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bean</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span> 
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span> 
+    
+    <span class="kd">public</span> <span class="nf">Bean</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span> 
+        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span> 
+    <span class="o">}</span> 
+
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="n">firstName</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">lastName</span><span class="o">;</span> 
+    <span class="o">}</span> 
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Builder</span> <span class="o">{</span> 
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span> 
+        <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span> 
+    
+        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">firstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span> 
+        <span class="o">}</span> 
+
+        <span class="kd">public</span> <span class="n">Builder</span> <span class="nf">lastName</span><span class="o">(</span><span class="n">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span> 
+            <span class="k">return</span> <span class="k">this</span><span class="o">;</span> 
+        <span class="o">}</span> 
+
+        <span class="kd">public</span> <span class="n">Bean</span> <span class="nf">build</span><span class="o">()</span> <span class="o">{</span> 
+            <span class="k">return</span> <span class="k">new</span> <span class="nf">Bean</span><span class="o">(</span><span class="n">firstName</span><span class="o">,</span> <span class="n">lastName</span><span class="o">);</span> 
+        <span class="o">}</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>You can then use the builder to create the build like this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="n">Bean</span> <span class="n">bean</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bean</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span> 
+                            <span class="o">.</span><span class="na">firstName</span><span class="o">(</span><span class="s">"Markus"</span><span class="o">)</span> 
+                            <span class="o">.</span><span class="na">lastName</span><span class="o">(</span><span class="s">"Vieghofer"</span><span class="o">)</span> 
+                            <span class="o">.</span><span class="na">build</span><span class="o">();</span> 
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bean</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>The project is also hosted on <a href="https://github.com/DevCouch/BuilderPattern">GitHub</a>.</p>
+
+<p><span style="color: #999999;">Featured image taken from: https://flic.kr/p/g5TFN5</span></p>
+

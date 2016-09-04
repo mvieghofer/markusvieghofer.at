@@ -1,0 +1,64 @@
+<p>I recently discovered an awesome Android framework, <a href="https://github.com/roboguice/roboguice" title="RoboGuice">RoboGuice</a>. On the Github page they state</p>
+
+<blockquote>
+  <p>RoboGuice 2 smoothes out some of the wrinkles in your Android development experience and makes things simple and fun.</p>
+</blockquote>
+
+<p>and this is absolutely true. I just use it some days but it makes everything even more awesome.</p>
+
+<p>So what is it? It’s a dependency injection framework that helps you dealing with boilerplate code such as initializing the view, getting objects from the intent, getting system service, etc. All that stuff that you don’t want to write anyway can be removed.</p>
+
+<p>A typical Android class could look like this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">AndroidWay</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span> 
+    <span class="n">TextView</span> <span class="n">name</span><span class="o">;</span> 
+    <span class="n">ImageView</span> <span class="n">thumbnail</span><span class="o">;</span> 
+    <span class="n">LocationManager</span> <span class="n">loc</span><span class="o">;</span> 
+    <span class="n">Drawable</span> <span class="n">icon</span><span class="o">;</span> 
+    <span class="n">String</span> <span class="n">myName</span><span class="o">;</span> 
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span> 
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span> 
+        <span class="n">name</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">);</span> 
+        <span class="n">thumbnail</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">thumbnail</span><span class="o">);</span> 
+        <span class="n">loc</span> <span class="o">=</span> <span class="o">(</span><span class="n">LocationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="n">Activity</span><span class="o">.</span><span class="na">LOCATION_SERVICE</span><span class="o">);</span> 
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">getResources</span><span class="o">().</span><span class="na">getDrawable</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">icon</span><span class="o">);</span> 
+        <span class="n">myName</span> <span class="o">=</span> <span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">app_name</span><span class="o">);</span> 
+        <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">myName</span><span class="o">);</span>
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>With RoboGuice all the boilerplate code can be removed. Everthing is just intialized by the framework which results in code similar to this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">RoboWay</span> <span class="kd">extends</span> <span class="n">RoboActivity</span> <span class="o">{</span> 
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">)</span> 
+    <span class="n">TextView</span> <span class="n">name</span><span class="o">;</span> 
+
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">thumbnail</span><span class="o">)</span> 
+    <span class="n">ImageView</span> <span class="n">thumbnail</span><span class="o">;</span> 
+
+    <span class="nd">@InjectResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">icon</span><span class="o">)</span> 
+    <span class="n">Drawable</span> <span class="n">icon</span><span class="o">;</span> 
+
+    <span class="nd">@InjectResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">app_name</span><span class="o">)</span> 
+    <span class="n">String</span> <span class="n">myName</span><span class="o">;</span> 
+
+    <span class="nd">@Inject</span> 
+    <span class="n">LocationManager</span> <span class="n">loc</span><span class="o">;</span> 
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span> 
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span> 
+        <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">myName</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>As you can see, the lines of the onCreate method were reduced dramatically which improves the readability of the method a lot. Since I use this framework my Android code looks a lot better. You should definitely try it out!</p>
+
+<p>Image Source: <a href="https://www.flickr.com/photos/rbulmahn/" title="https://www.flickr.com/photos/rbulmahn/">https://www.flickr.com/photos/rbulmahn/</a></p>
+

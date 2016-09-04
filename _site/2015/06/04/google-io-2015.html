@@ -1,0 +1,60 @@
+<p>Last week the yearly developer conference Google I/O took place. Google presented some interesting new things the just launched or will launch in the near future.</p>
+
+<p>For example a modular phone developed during the project Ara was presented. Also Google introduced a new <a href="https://photos.google.com/">photo app</a>, presented Android M, a Material desgin support library and a lot more things.</p>
+
+<p>Today I want to focus and the new features of Android M and the design support library.</p>
+
+<h1 id="android-m">Android M</h1>
+
+<p>The developer preview of Android M is already available and can be used to test out the newest features. Also this time the developer preview will be updated regularly in order to ship the latest bug fixed, features, etc. to the developers.</p>
+
+<p>The definite release date isn’t yet known but it will be in Q3 of this year.</p>
+
+<p>With Android M a lot of new features will come that are very interesting for developers. Some of them have deep impact also for older apps. This means that you have to test your older apps on the new system, too, if you want to make sure everything works just fine.</p>
+
+<h2 id="android-permissions">Android Permissions</h2>
+
+<p>The feature with probably the greatest impact on all apps are the new Android permissions. Until now as a user you had to sign off all permissions when you installed an app. This will not be true anymore for Android M.</p>
+
+<p>In Android M the user can grant and revoke any rights the app needs at any time. So if you developed an app that needs any permission you probably have to update it.</p>
+
+<h2 id="app-linking">App linking</h2>
+
+<p>With Android L(ollipop) some apps could claim to know certain kinds of URL. Therefore you got an open with dialog if you clicked some links to choose with which application the link should be opened.</p>
+
+<p>In Android M this concept was developed a step further. Now you can also specify these URL within your app but you have to provide a json file on your webserver that links your app and your domain.</p>
+
+<p>To be able to link your app with your domain the json file on your webserver has to contain the fingerprint of your app.</p>
+
+<p>When your app is linked with your domain the open with dialog will not show up anymore. Rather your app will be opened immediately.</p>
+
+<h2 id="what-are-the-other-features">What are the other features?</h2>
+
+<p>The two features I just discussed were the features that I liked best or I think they are the most important ones. Of course there are a lot of other features in the new Android version.</p>
+
+<p>Some examples are automatic backups, chrome custom tabs, Android pay, support for fingerprint sensors, better power management, an Android support design library and many more.</p>
+
+<p>All of these features are great but the one I want to talk more about is the Android support design library.</p>
+
+<h1 id="the-android-support-design-library">The Android support design library</h1>
+
+<p>The Android support design library contains a lot of the elements suggested by the Material Design specification. You don’t have to implement all of the UI elements on your own or rely on third party libraries but you can use the support design library to access them.</p>
+
+<p>Elements <a href="http://developer.android.com/reference/android/support/design/widget/package-summary.html">included in the library</a> are</p>
+
+<ul>
+  <li>AppBarLayout</li>
+  <li>Snackbar</li>
+  <li>TabLayout</li>
+  <li>FloatingActionButton</li>
+  <li>etc.</li>
+</ul>
+
+<p>If you include the library like this</p>
+
+<p>compile ‘com.android.support:design:22.2.0’</p>
+
+<p>you can use all these elements in your app. Also with this library you can easily develop Material Design apps for older platforms, too.</p>
+
+<p>If you want to know more about what was presented at the Google I/O you can <a href="https://events.google.com/io2015/">watch the videos</a> of the talks online.</p>
+

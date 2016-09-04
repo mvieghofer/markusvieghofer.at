@@ -1,0 +1,104 @@
+<p>I’ve decided to learn a new programming language this year. It’s going to be Python.</p>
+
+<p>Why Python you ask?</p>
+
+<p>It’s something new, kind of different than Java (the programming language I currently work with) and provides some awesome features. This is my current top 5 list of Python features.</p>
+
+<p>It is…</p>
+
+<h1 id="dynamically-typed">1. Dynamically Typed</h1>
+
+<p>Python is dynamically typed whereas Java is statically typed. The difference between the two type system is that Java determines the type at compile time and Python at runtime.</p>
+
+<p>This makes Python a lot more flexible. You don’t have to define the type of a variable, Python infers it from the variables value.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">():</span> 
+    <span class="n">myInt</span> <span class="o">=</span> <span class="mi">5</span> 
+    <span class="n">myString</span> <span class="o">=</span> <span class="s">"test string"</span>
+</code></pre>
+</div>
+
+<p>Although Python is dynamically typed it is still is strongly typed. This means a variable that holds a string value will always be of the type string. You cannot modify type of a string by e.g. adding a number to it.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">():</span> 
+    <span class="n">myVar</span> <span class="o">=</span> <span class="s">"test"</span> 
+
+    <span class="c"># this works </span>
+    <span class="n">myVar</span> <span class="o">=</span> <span class="mi">5</span> 
+    <span class="n">myVar</span> <span class="o">+=</span> <span class="mi">10</span> 
+
+    <span class="c">#this doesn't work </span>
+    <span class="k">print</span> <span class="s">"test"</span> <span class="o">+</span> <span class="n">myVar</span>
+</code></pre>
+</div>
+
+<h1 id="list-functions">2. List Functions</h1>
+
+<p>Python provides some awesome list functions. This is one of the most powerful features of Python.</p>
+
+<p>You can easily define a list.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span> 
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>You can also apply a lot of functions on lists.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span> 
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> 
+    <span class="nb">list</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="c"># list = [1, 2, 3, 4, 5, 6] </span>
+    <span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c"># prints [3, 4] </span>
+    <span class="nb">list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># prints [6], this feature is really awesome!! </span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c"># list = [1, 2, 3, 5, 6] </span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span> <span class="c"># list = [1, 17, 2, 3, 5, 6] </span>
+    <span class="n">element</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># element = 6, list = [1, 17, 2, 3, 5] </span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c"># list = [5, 3, 2, 17, 1] </span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c"># list = [1, 2, 3, 5, 17]</span>
+</code></pre>
+</div>
+
+<p>However, the coolest feature for lists is that you can apply functions directly on lists (and all its items). You can use this to modify all elements in a certain list. And you do all this in one line.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span> 
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> 
+    <span class="n">doubleList</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span> 
+    <span class="c"># doubleList = [2, 4, 6, 8]</span>
+</code></pre>
+</div>
+
+<h1 id="named-arguments">3. Named Arguments</h1>
+
+<p>You can define named arguments for methods and set default values for them. Later, when you invoke the method you can set the values of the arguments by name.</p>
+
+<p>This allows you to use certain default values and only pass the necessary values to the method.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">stringArg</span><span class="p">,</span> <span class="n">intArg</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span> 
+    <span class="k">if</span> <span class="n">booleanArg</span><span class="p">:</span> 
+        <span class="k">print</span> <span class="n">stringArg</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intArg</span><span class="p">)</span> 
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">print</span> <span class="n">stringArg</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intArg</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> 
+
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span> 
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> 
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> 
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">intArg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h1 id="readability">4. Readability</h1>
+
+<p>Python is really easy to read. There isn’t any clutter, nearly nothing that isn’t absolutely necessary.</p>
+
+<p>Differently than Java, which uses curly braces for defining blocks, Python programs use intention for doing that. This also means, that most Python programs will look similar.</p>
+
+<p>Therefore it is easy for developers to read any Python program by any developer. You will probably agree with me that this is one of the most important features of any programming language.</p>
+
+<h1 id="purely-object-oriented">5. Purely Object Oriented</h1>
+
+<p>In Python everything is an object. There are no primitive data types as in Java.</p>
+
+<p>Even though it doesn’t change the basic programming principle it makes Python differently from Java. I wanted to learn a purely object oriented language for once. Therefore Python seems to be a very good fit.</p>
+
+<p><span style="color: #808080;">Feature image taken from: <a href="https://flic.kr/p/NWe1M" title="Python Photo Link">https://flic.kr/p/NWe1M</a></span></p>
+

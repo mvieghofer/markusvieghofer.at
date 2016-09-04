@@ -1,0 +1,53 @@
+<p>Last year I’ve written <a href="http://devcouch.net/roboguice-makes-android-development-more-awesome/">a post</a> about how <a href="https://github.com/roboguice/roboguice">RoboGuice</a> helps you to make Android programming a lot more readable. Shortly after I’ve published my article a new version of RoboGuice, version 3, was released.</p>
+
+<p>Today I want to review the newest version and point out some very cool features.</p>
+
+<h1 id="whats-new-in-roboguice-3">Whats new in RoboGuice 3</h1>
+
+<p>Previously RoboGuice was a little slow and memory hungry. Especially the startup took some time. The reason for this is that it has to scan all classes to find all the injection points.</p>
+
+<p>This release contains mostly performance optimizations so that RoboGuice gets a lot faster (35% – 70%) and is also less memory hunger. This great increase in runtime performance was accomplished by using the annotation processer RoboBlender.</p>
+
+<p>This annotation processor basically builds a database of annotations which are then used by RoboGuice to quickly inject all needed objects. There is no need of scanning all classes any more.</p>
+
+<p>RoboBlender is purely optional, though. This means if you don’t want to use it, you don’t have to. However you doesn’t want to boost the performance of the app?</p>
+
+<p>Besides the performance optimizations also some other features were implemented. The complete changelog can be found <a href="https://github.com/roboguice/roboguice/issues?q=milestone%3A3.0+is%3Aclosed">here</a>.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>I assume that you use gradle as build automation tool. If so, including RoboGuice to your project is very simple.</p>
+
+<p>All you need to do is to add these two lines to your build.gradle file</p>
+
+<div class="language-groovy highlighter-rouge"><pre class="highlight"><code><span class="n">dependencies</span> <span class="o">{</span> 
+    <span class="n">compile</span> <span class="s1">'org.roboguice:roboguice:3.+'</span> 
+    <span class="n">provided</span> <span class="s1">'org.roboguice:roboblender:3.+'</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Of course you don’t have to use gradle. You can also include the library via <a href="https://github.com/roboguice/roboguice/wiki/InstallationMaven">Maven</a> or <a href="https://github.com/roboguice/roboguice/wiki/InstallationNonMaven">manually</a>.</p>
+
+<p>As I said before RoboBlender is optional. You don’t have to include it to your app. However, if you don’t want to use RoboBlender you have to disable it. This can either be be done by using an environment variable <span class="code">roboguice.useAnnotationDatabases=false</span> or doing it programmatically (this has to be done before creating the first injector) <span class="code">RoboGuice.setUseAnnotationDatabases(false)</span></p>
+
+<h1 id="example">Example</h1>
+
+<p>After you configured everything you can start using RoboGuice in your app. The following example shows the most basic setup for an activity.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@ContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">)</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">RoboActivity</span> <span class="o">{</span> 
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text_view</span><span class="o">)</span> 
+    <span class="kd">private</span> <span class="n">TextView</span> <span class="n">textView</span><span class="o">;</span> 
+
+    <span class="nd">@Override</span> 
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span> 
+        <span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p><span style="color: #999999;">Featured Image taken from: http://bit.ly/1RnLxHZ</span></p>
+

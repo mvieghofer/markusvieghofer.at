@@ -1,0 +1,66 @@
+<p>Writing tests is essential, but writing good tests is hard. It is specially hard to write good and readable assertions.</p>
+
+<p>When you use JUnit you have methods such as <span class="code">assertEquals</span> or <span class="code">assertTrue</span>. Both these methods work fine and do what they should do. However if the assertions get more complex they might not be as handy as assertions could be.</p>
+
+<p><a href="http://joel-costigliola.github.io/assertj/">AssertJ</a> is a library that gives you the possibility to write fluent assertions in your tests.</p>
+
+<p>The following example implementation of unit tests show the difference between AssertJ and standard JUnit tests.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="nd">@Test</span> 
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testZooJunit</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span> <span class="n">expectedAnimals</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span> 
+    <span class="n">expectedAnimals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">dog</span><span class="o">);</span> 
+    <span class="n">expectedAnimals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">monkey</span><span class="o">);</span> 
+    <span class="n">expectedAnimals</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">lion</span><span class="o">);</span> 
+    <span class="n">assertEquals</span><span class="o">(</span><span class="n">expectedAnimals</span><span class="o">,</span> <span class="n">zoo</span><span class="o">.</span><span class="na">animals</span><span class="o">);</span> 
+<span class="o">}</span> 
+
+<span class="nd">@Test</span> 
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testZoo</span><span class="o">()</span> <span class="o">{</span> 
+    <span class="n">assertThat</span><span class="o">(</span><span class="n">zoo</span><span class="o">.</span><span class="na">animals</span><span class="o">).</span><span class="na">containsOnly</span><span class="o">(</span><span class="n">dog</span><span class="o">,</span> <span class="n">monkey</span><span class="o">,</span> <span class="n">lion</span><span class="o">);</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>As you can see the AssertJ test tells you in much less code exactly was it does. This make such tests a lot more readable.</p>
+
+<p>Besides the standard assertions AssertJ also provides a way to generate customized assertion classes. This can either be done via the command line or your build tool, such as Maven. Such a generated assertion class can look like this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="cm">/** ... */</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnimalAssert</span> <span class="kd">extends</span> <span class="n">AbstractAssert</span><span class="o">&lt;</span><span class="n">AnimalAssert</span><span class="o">,</span> <span class="n">Animal</span><span class="o">&gt;</span> <span class="o">{</span> 
+    <span class="c1">// Constructor </span>
+    <span class="cm">/** ... */</span> 
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">AnimalAssert</span> <span class="nf">assertThat</span><span class="o">(</span><span class="n">Animal</span> <span class="n">actual</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">AnimalAssert</span><span class="o">(</span><span class="n">actual</span><span class="o">);</span> 
+    <span class="o">}</span> 
+
+    <span class="cm">/** ... */</span> 
+    <span class="kd">public</span> <span class="n">AnimalAssert</span> <span class="nf">hasName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="c1">// check that actual Animal we want to make assertions on is not null.     isNotNull(); </span>
+        <span class="c1">// overrides the default error message with a more explicit one String    </span>
+        <span class="n">assertjErrorMessage</span> <span class="o">=</span> <span class="s">"\nExpecting name of:\n &lt;%s&gt;\nto be:\n &lt;%s&gt;\nbut was:\n &lt;%s&gt;"</span><span class="o">;</span> 
+        <span class="c1">// null safe check </span>
+        <span class="n">String</span> <span class="n">actualName</span> <span class="o">=</span> <span class="n">actual</span><span class="o">.</span><span class="na">name</span><span class="o">;</span> 
+        <span class="k">if</span> <span class="o">(!</span><span class="n">Objects</span><span class="o">.</span><span class="na">areEqual</span><span class="o">(</span><span class="n">actualName</span><span class="o">,</span> <span class="n">name</span><span class="o">))</span> <span class="o">{</span> 
+            <span class="n">failWithMessage</span><span class="o">(</span><span class="n">assertjErrorMessage</span><span class="o">,</span> <span class="n">actual</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span> <span class="n">actualName</span><span class="o">);</span> 
+        <span class="o">}</span> 
+        <span class="c1">// return the current assertion for method chaining return this; </span>
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>With these generated classes you can do assertions that are customized for your objects. Of course, you can implement your own assertion methods in these classes, too. An example of a test that uses the <span class="code">AnimalAssert</span> class can look like this:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">net</span><span class="o">.</span><span class="na">devcouch</span><span class="o">.</span><span class="na">assertj</span><span class="o">.</span><span class="na">AnimalAssert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnimalTest</span> <span class="o">{</span> 
+    <span class="c1">// setup </span>
+    <span class="nd">@Test</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testName</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">animal</span><span class="o">).</span><span class="na">hasName</span><span class="o">(</span><span class="n">ANIMAL_NAME</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>If you want to know more please read the <a href="http://joel-costigliola.github.io/assertj/assertj-core.html">docs</a> or head over to <a href="https://github.com/DevCouch/Assertj-Showcase">GitHub</a> and check out my AssertJ showcase.</p>
+

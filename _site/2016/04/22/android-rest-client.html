@@ -1,0 +1,119 @@
+<p>When you develop an Android application that should talk to a server you often have to consume a REST API. There are some ways how you can do that. In the following post I will show you how the way recommended by the Android docs works.</p>
+
+<p>Until Android 6.0 (which is API level 23) you could use the Apache HTTP Client. However since Android 6.0 this API isn’t supported anymore by default. Instead they suggest to use the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html">HttpURLConnection</a> .</p>
+
+<p>The reason for this change is that the HttpURLConnection API is more efficient and more transparent to use as stated <a href="http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client">here</a>.</p>
+
+<p>The HttpURLConnection API has a good documentation. It might be a little hard to figure everything out at first, though.</p>
+
+<h2 id="get-request">GET Request</h2>
+<p>Retrieving a resource via an Http <code class="highlighter-rouge">GET</code> is the easiest use case. The following code listing (taken and adapted from the official documentation) will show you how.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">getResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// do something with the stream and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span> 
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<h2 id="post-request">POST Request</h2>
+<p>Posting an object to a REST API is very similar to the <code class="highlighter-rouge">GET</code> request. The only thing you have to do additionally is to set the <a href="http://developer.android.com/reference/java/net/URLConnection.html#setDoOutput(boolean)"><code class="highlighter-rouge">setDoOutput(boolean)</code></a> method to true.</p>
+
+<p>Also you should set the size of the object you want to send. This can either be done with the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html#setChunkedStreamingMode(int)"><code class="highlighter-rouge">setChunkedStreamingMode(int)</code></a> or the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html#setFixedLengthStreamingMode(int)"><code class="highlighter-rouge">setFixedLengthStreamingMode(int)</code></a> method. Which method to use depends whether you know the size of the object to send or not.</p>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">postResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">,</span> <span class="n">Object</span> <span class="n">objectToPost</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+    <span class="c1">// this makes the urlConnection a POST request</span>
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="c1">// you should set the size of the object you want to send.</span>
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setChunkedStreamingMode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span> <span class="c1">// alternatively you can also use the setFixedLengthStreamingMode(int) method</span>
+
+    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+    <span class="c1">// write the object to the out stream</span>
+
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// read the result from the server and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span> 
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<h2 id="put-request">PUT Request</h2>
+<p>The <code class="highlighter-rouge">PUT</code> request is very similar to the <code class="highlighter-rouge">POST</code> request. The only difference is that you have to set the request method to <code class="highlighter-rouge">PUT</code>. All the other options are the same.</p>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Object</span> <span class="nf">putResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">,</span> <span class="n">Object</span> <span class="n">objectToPut</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="c1">// set the request method to PUT</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+
+    <span class="c1">// set the stream size</span>
+
+    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+    <span class="c1">// write to objectToPut to the output stream</span>
+
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// read the result from the server and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span> 
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+</code></pre>
+</div>
+<p><br /></p>
+<h2 id="delete-request">DELETE Request</h2>
+<p>As for the <code class="highlighter-rouge">PUT</code> request you also have to set the request method for the <code class="highlighter-rouge">DELETE</code> request explicitly. To execute the request you have to call the <code class="highlighter-rouge">getResponseCode()</code> method.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">deleteResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    
+    <span class="c1">// set the request method to DELETE</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
+
+    <span class="c1">// get the result</span>
+    <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">==</span> <span class="mi">200</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span> 
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+</code></pre>
+</div>

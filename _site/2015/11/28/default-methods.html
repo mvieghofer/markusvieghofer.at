@@ -1,0 +1,50 @@
+<p>Since <a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">Java 8</a> you can implement default methods to interfaces. This is pretty handy if your default implementation can be implemented in a generic way.</p>
+
+<p>One example are the sort methods that come with the collection interfaces. In previous versions of Java, a lot of util methods were added in util classes. The Collections class provided a lot of useful methods for collections.</p>
+
+<p>With default methods this isn’t necessary anymore. The interface itself can provide the default implementations which can then be overriden or extended in the classes.</p>
+
+<h2 id="multiple-inheritance">Multiple Inheritance</h2>
+
+<p>This can lead to the problem of multiple inheritance. When one of your classes implements at least two interfaces with the same default method your compiler will exit with an error. You will have to manually solve this conflict.</p>
+
+<p>This could be done this way:</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">A</span> <span class="o">{</span> 
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">message</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">B</span> <span class="o">{</span> 
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Another implementation of foo, "</span> <span class="o">+</span> <span class="n">message</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="kd">implements</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span> 
+        <span class="n">A</span><span class="o">.</span><span class="na">super</span><span class="o">.</span><span class="na">bar</span><span class="o">(</span><span class="n">message</span><span class="o">);</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h2 id="will-default-methods-be-the-end-of-utility-classes">Will default methods be the end of utility classes?</h2>
+
+<p>With default methods utility classes were made obsolete. Everything you can do with utility classes you can do with default method implementations in interface, too.</p>
+
+<p>The pros about default methods are that you can add them directly to your class. If you implement some utility method that will be used for a broad range of classes maybe default methods are the better way.</p>
+
+<p>However default methods make multiple inheritance a potential problem again. It might be hard to resolve such a conflict.</p>
+
+<p>Since the compiler will tell you about the error as soon as the code is compiled you will realize such errors very soon. This will give you the chance to fix the errors as soon as possible.</p>
+
+<p>Another point against default methods are that you might not want to let your class implement a lot of different interfaces that contain default methods. On the other hand, if you have an interface ‘A’ with a default method implementation you can easily create a util class that implements this methods if you don’t want your class to implement the interface ‘A’.</p>
+
+<p>As always it is a matter of taste and dependent on the actual use case.</p>
+
+<p>A project that contains the default method show cases is also available on <a href="https://github.com/DevCouch/DefaultMethods">GitHub</a>.</p>
+
+<p><span style="color: #999999;">Featured image taken from: <a href="https://flic.kr/p/iQbXu9">https://flic.kr/p/iQbXu9</a></span></p>
+
