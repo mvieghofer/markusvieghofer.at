@@ -1,0 +1,38 @@
+---
+layout: post
+title: Why you should upgrade to an SSD
+date: '2015-11-18 19:01:38'
+tags:
+- hard-drive
+- speed
+- ssd
+---
+
+
+I just upgraded the hard drive of my MacBook Pro from an HDD to an SSD. As you can see in the video below the boot time of my laptop increased incredible. With the HDD it took over 10 Minutes to boot up my laptop and start Spotify. With my new SSD this is done in less than 30 seconds.
+
+<div style="text-align: center;"><iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/-tx2ebZ0HXU" width="560"></iframe></div>
+## Why SSDs are cool
+
+First of all they are super fast. The SSD I use can read about 540MB/sec whereas the HDD I used before could only read about 80MB/sec. So now I can read about 6.75 times more data in the same time as before.
+
+Also SSDs need less power. This can increase the battery up time of your laptop.
+
+Since nothing moves inside you hard drive, there is no vibration, sound or heat produced.
+
+SSDs typically life longer than HDDs.
+
+
+## How to upgrade you laptop to an SSD
+
+The MacBook I use at work already has an SSD so I knew how awesome and fast it would be. After a little research I found a great tutorial by [CNET](http://www.cnet.com/how-to/upgrade-your-macbook-install-ssd-hard-drive/) how to change the hard drive in your MacBook Pro. It contained also a video tutorial where everything was described in detail. This was great since I already knew what to expect when I open my laptop.
+
+First I bought a SSD [hard drive](http://www.amazon.de/gp/product/B00P73B1E4/ref=as_li_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=B00P73B1E4&linkCode=as2&tag=devc0b-21) and a hard drive [docking station](http://www.amazon.de/gp/product/B00F6QT8I8/ref=as_li_tl?ie=UTF8&camp=1638&creative=19454&creativeASIN=B00F6QT8I8&linkCode=as2&tag=devc0b-21). I connected the SSD to my laptop and copied everything form my HDD to my SSD using an app called [SuperDuper](http://www.shirt-pocket.com/SuperDuper/SuperDuperDescription.html). I took about 2.5 hours until everything was copied.
+
+After that I opened the back of my laptop and changed the HDD to the SSD. Since the content of my hard drive was copied to the SSD I could boot up the laptop as usual.
+
+Although the first boot took a little longer everything works now and is super fast!
+
+<span style="color: #999999;">Featured image taken from: https://flic.kr/p/vh4GaL</span>
+
+
