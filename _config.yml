@@ -9,7 +9,7 @@ paginate: 15
 baseurl: /
 domain_name: 'http://markusvieghofer.at'
 google_analytics: 'UA-83732990-1'
-gems: [jekyll-paginate]
+gems: [jekyll-paginate, jemoji]
 
 permalink: /:slug
 
