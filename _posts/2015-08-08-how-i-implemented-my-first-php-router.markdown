@@ -2,6 +2,7 @@
 layout: post
 title: How I implemented my first PHP Router
 date: '2015-08-08 10:38:25'
+disqus: true
 tags:
 - php
 - router
@@ -22,11 +23,11 @@ First I edited the .htaccess file to rewrite the URL and pass it to my index.php
 The .htaccess file I use look like the following:
 
 ```bash
-Options -MultiViews 
-RewriteEngine On 
-RewriteBase /public/ 
-RewriteCond %{REQUEST_FILENAME} !-d 
-RewriteCond %{REQUEST_FILENAME} !-f 
+Options -MultiViews
+RewriteEngine On
+RewriteBase /public/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$  index.php?url=$1 [QSA,L]
 ```
 
@@ -38,10 +39,10 @@ You could add a mapping between an url and a controller method to the router and
 
 The <span class="code">add</span> method of the router class looks like the following:
 
-```php 
-public function add($uri, $function) { 
-    $uri = str_replace('/', '\/', $uri); 
-    $this->urlMap[$uri] = $function; 
+```php
+public function add($uri, $function) {
+    $uri = str_replace('/', '\/', $uri);
+    $this->urlMap[$uri] = $function;
 }
 ```
 
@@ -50,11 +51,11 @@ It takes an url parameter and maps it to the function passed. This can be either
 Example calls for this method could look like this:
 
 ```php
-$router = new Router(); 
-$router->add('/home', 'HomeController#indexAction'); 
-$router->add('/about', function() { 
-    $controller = new AboutController(); 
-    $controller->indexAction(); 
+$router = new Router();
+$router->add('/home', 'HomeController#indexAction');
+$router->add('/about', function() {
+    $controller = new AboutController();
+    $controller->indexAction();
 });
 ```
 
@@ -69,71 +70,71 @@ I can build the path to the controller and include it to my PHP script. Then I c
 The parameters passed to that function are extracted by the getParamsFromUrl function. This function basically compares the mapped url with the incoming url and cuts off everything from the incoming url that is also defined in the mapped url. For example, when the mapped url is <span class="code">/post/\d+</span> and the incoming url is <span class="code">/post/15</span> the extracted parameters are <span class="code">15</span>.
 
 ```php
-public function run() { 
-    $url = '/'; 
-    if (isset($_GET['url'])) { 
-        $url .= $_GET['url']; 
-    } 
+public function run() {
+    $url = '/';
+    if (isset($_GET['url'])) {
+        $url .= $_GET['url'];
+    }
 
-    foreach ($this->urlMap as $key =&gt; $value) { 
-        if (preg_match("/^$key$/", $url)) { 
-            $this->mapUrl($url, $key, $value); 
-        } 
-    } 
-} 
+    foreach ($this->urlMap as $key =&gt; $value) {
+        if (preg_match("/^$key$/", $url)) {
+            $this->mapUrl($url, $key, $value);
+        }
+    }
+}
 
-protected function getControllerFileName($controllerName) { 
-    return APP_PATH . '/controllers/' . $controllerName . '.php'; 
-} 
+protected function getControllerFileName($controllerName) {
+    return APP_PATH . '/controllers/' . $controllerName . '.php';
+}
 
-private function mapUrl($url, $key, $function) { 
-    if (is_string($function)) { 
-        // extract the params form the url and create an array 
-        // from them 
-        $params = $this->getParamsFromUrl($url, $key); 
-        $params = $params ? array_values($params) : []; 
+private function mapUrl($url, $key, $function) {
+    if (is_string($function)) {
+        // extract the params form the url and create an array
+        // from them
+        $params = $this->getParamsFromUrl($url, $key);
+        $params = $params ? array_values($params) : [];
 
-        // split the controller#function string at the # symbol 
-        $function = explode('#', $function); 
+        // split the controller#function string at the # symbol
+        $function = explode('#', $function);
 
-        // include the controller and create an instance 
-        require_once($this->getControllerFileName($function[0])); 
-        $controller = new $function[0]; 
+        // include the controller and create an instance
+        require_once($this->getControllerFileName($function[0]));
+        $controller = new $function[0];
 
         // call the function of the controller and pass the params      
-        call_user_func_array([$controller, $function[1]], $params); 
-    } else { 
-        call_user_func($function); 
-    } 
-} 
+        call_user_func_array([$controller, $function[1]], $params);
+    } else {
+        call_user_func($function);
+    }
+}
 
-private function getParamsFromUrl($url, $regex) { 
-    if (isset($url) &amp;&amp; isset($regex)) { 
-        $regex = str_replace('\/', '/', $regex); 
-        $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL)); 
-        $regex = explode('/', filter_var(rtrim($regex, '/'), FILTER_SANITIZE_URL)); 
-        if (sizeof($url) != sizeof($regex)) { 
-            return []; 
-        } 
-        foreach ($url as $index =&gt; $value) { 
-            if ($regex[$index] == $value) { 
-                unset($url[$index]); 
-            } 
-        } 
-        return $url; 
-    } 
+private function getParamsFromUrl($url, $regex) {
+    if (isset($url) &amp;&amp; isset($regex)) {
+        $regex = str_replace('\/', '/', $regex);
+        $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
+        $regex = explode('/', filter_var(rtrim($regex, '/'), FILTER_SANITIZE_URL));
+        if (sizeof($url) != sizeof($regex)) {
+            return [];
+        }
+        foreach ($url as $index =&gt; $value) {
+            if ($regex[$index] == $value) {
+                unset($url[$index]);
+            }
+        }
+        return $url;
+    }
 }
 ```
 
 After implementing this function it has to be called. This is done in the index.php file right after all urls are added to the router.
 
 ```php
-$router = new Router(); 
-$router->add('/home', 'HomeController#indexAction'); 
-$router->add('/about', function() { 
-    $controller = new AboutController(); 
-    $controller->indexAction(); 
-}); 
+$router = new Router();
+$router->add('/home', 'HomeController#indexAction');
+$router->add('/about', function() {
+    $controller = new AboutController();
+    $controller->indexAction();
+});
 $router->run();
 ```
 
@@ -147,64 +148,62 @@ As you already guessed, the <span class="code">get</span> method executes a func
 The new <span class="code">add</span> method does basically the same thing as before, it just stores the urls and functions in a matrix where the second dimension are the HTTP methods.
 
 ```php
-public function get($uri, $function) { 
-    $this->add($uri, $function, ['GET']); 
-} 
+public function get($uri, $function) {
+    $this->add($uri, $function, ['GET']);
+}
 
-public function post($uri, $function) { 
-    $this->add($uri, $function, ['POST']); 
-} 
+public function post($uri, $function) {
+    $this->add($uri, $function, ['POST']);
+}
 
-public function put($uri, $function) { 
-    $this->add($uri, $function, ['PUT']); 
-} 
+public function put($uri, $function) {
+    $this->add($uri, $function, ['PUT']);
+}
 
-public function delete($uri, $function) { 
-    $this->add($uri, $function, ['DELETE']); 
-} 
+public function delete($uri, $function) {
+    $this->add($uri, $function, ['DELETE']);
+}
 
-public function add($uri, $function, array $methods) { 
-    $uri = str_replace('/', '\/', $uri); 
-    if (!isset($this->urlMap[$uri]) || empty($this->urlMap[$uri])) { 
-        $this->urlMap[$uri] = []; 
-    } 
-    foreach($methods as $method) { 
-        $this->urlMap[$uri][$method] = $function; 
-    } 
+public function add($uri, $function, array $methods) {
+    $uri = str_replace('/', '\/', $uri);
+    if (!isset($this->urlMap[$uri]) || empty($this->urlMap[$uri])) {
+        $this->urlMap[$uri] = [];
+    }
+    foreach($methods as $method) {
+        $this->urlMap[$uri][$method] = $function;
+    }
 }
 ```
 
 After this change also the <span class="code">run</span> method has to be adapted. The correct method for the current HTTP method has to be used.
 
 ```php
-public function run() { 
-    $method = $_SERVER['REQUEST_METHOD']; 
-    $url = '/'; 
-    if (isset($_GET['url'])) { 
-        $url .= $_GET['url']; 
-    } 
-    foreach ($this->urlMap as $key => $value) { 
-        if (preg_match("/^$key$/", $url) && isset($value) && isset($value[$method])) { 
-            $this->mapUrl($url, $key, $value[$method]); 
-        } 
-    } 
+public function run() {
+    $method = $_SERVER['REQUEST_METHOD'];
+    $url = '/';
+    if (isset($_GET['url'])) {
+        $url .= $_GET['url'];
+    }
+    foreach ($this->urlMap as $key => $value) {
+        if (preg_match("/^$key$/", $url) && isset($value) && isset($value[$method])) {
+            $this->mapUrl($url, $key, $value[$method]);
+        }
+    }
 }
 ```
 
 After these changes were implemented the configuration of the router has to be adapted. All urls that should only be mapped for a certain HTTP method are mapped using the corresponding method. All urls that should be mapped for multiple methods are mapped using the <span class="code">add</span> method. For this case also the methods have to be passed.
 
 ```php
-$router = new Router(); 
-$router->get('/home', 'HomeController#getAction'); 
-$router->post('/home', 'HomeController#postAction'); 
-$router->add('/about', function() { 
-    $controller = new AboutController(); 
-    $controller->indexAction(); 
-}, ['GET', 'POST', 'DELETE', 'PUT']); 
+$router = new Router();
+$router->get('/home', 'HomeController#getAction');
+$router->post('/home', 'HomeController#postAction');
+$router->add('/about', function() {
+    $controller = new AboutController();
+    $controller->indexAction();
+}, ['GET', 'POST', 'DELETE', 'PUT']);
 $router->run();
 ```
  
 
 <span style="color: #999999;">Featured image take from https://flic.kr/p/hW31Na</span>
-
-

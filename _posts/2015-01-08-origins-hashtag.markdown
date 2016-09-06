@@ -2,6 +2,7 @@
 layout: post
 title: Origins of the hashtag
 date: '2015-01-08 20:36:50'
+disqus: true
 tags:
 - hashtag
 - twitter
@@ -40,5 +41,3 @@ Even though there are a lot of reasons to use hashtags, you should never overuse
 <iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="//www.youtube.com/embed/57dzaMaouXA" width="560"></iframe>
 
 <span style="color: #808080;">Featured image source: [http://www.flickr.com/photos/mikecogh/5941302441/](http://www.flickr.com/photos/mikecogh/5941302441/)</span>
-
-

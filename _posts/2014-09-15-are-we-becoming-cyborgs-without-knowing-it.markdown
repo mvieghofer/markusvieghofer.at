@@ -2,6 +2,7 @@
 layout: post
 title: Are we becoming cyborgs without knowing it?
 date: '2014-09-15 22:30:59'
+disqus: true
 tags:
 - cyborg
 ---
@@ -24,5 +25,3 @@ Besides these and other similar invention everything is connected nowadays. We n
 [![internet-unfollow](http://i0.wp.com/thatsthaway.files.wordpress.com/2014/07/internet-unfollow.jpg?resize=252%2C300)](https://thatsthaway.files.wordpress.com/2014/07/internet-unfollow.jpg)One problem I see with this trend is that the majority of people are not able to think about the consequences. No matter if the reason is that they just don’t understand the technology or they don’t see what somebody could to with it (probably both facts are true).
 
 I’m still not 100% sure if the current trend is going into a good direction or not. I’m still sceptical. We will see what the future brings.
-
-

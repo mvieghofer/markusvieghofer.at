@@ -2,6 +2,7 @@
 layout: post
 title: Why Java 8 Default Methods are cool
 date: '2015-11-28 18:17:07'
+disqus: true
 tags:
 - interface
 - java
@@ -23,22 +24,22 @@ This can lead to the problem of multiple inheritance. When one of your classes i
 This could be done this way:
 
 ```java
-public interface A { 
-    default void bar(String message) { 
-        System.out.println("Hello, " + message); 
-    } 
+public interface A {
+    default void bar(String message) {
+        System.out.println("Hello, " + message);
+    }
 }
 
-public interface B { 
-    default void bar(String message) { 
-        System.out.println("Another implementation of foo, " + message); 
-    } 
+public interface B {
+    default void bar(String message) {
+        System.out.println("Another implementation of foo, " + message);
+    }
 }
 
-public class Foo implements A, B { 
-    public void bar(String message) { 
-        A.super.bar(message); 
-    } 
+public class Foo implements A, B {
+    public void bar(String message) {
+        A.super.bar(message);
+    }
 }
 ```
 
@@ -60,5 +61,3 @@ As always it is a matter of taste and dependent on the actual use case.
 A project that contains the default method show cases is also available on [GitHub](https://github.com/DevCouch/DefaultMethods).
 
 <span style="color: #999999;">Featured image taken from: [https://flic.kr/p/iQbXu9](https://flic.kr/p/iQbXu9)</span>
-
-

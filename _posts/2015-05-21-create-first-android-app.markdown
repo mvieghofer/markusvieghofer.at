@@ -2,6 +2,7 @@
 layout: post
 title: Create your first Android App
 date: '2015-05-21 19:18:12'
+disqus: true
 tags:
 - android
 - tutorial
@@ -96,5 +97,3 @@ If you want to translate your application to German you just have to create a <s
 That’s basically it. When you start the application by clicking the Run button your Hello World application can either run in an emulator or on your phone. From there you can start coding your super awesome first android app!
 
 <span style="color: #999999;">Featured Image take from https://flic.kr/p/61HzUd</span>
-
-

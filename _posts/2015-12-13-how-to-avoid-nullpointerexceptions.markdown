@@ -2,6 +2,7 @@
 layout: post
 title: How to avoid NullPointerExceptions
 date: '2015-12-13 20:22:19'
+disqus: true
 tags:
 - design-pattern
 - java
@@ -57,87 +58,87 @@ dependencies { compile 'com.google.code.findbugs:annotations:3.0.1' }
 After that I created an Address class that holds a very simplified version of an address object of a person.
 
 ```java
-package net.devcouch; 
+package net.devcouch;
 
-public class Address { 
-    public final String street; 
-    public final String city; 
+public class Address {
+    public final String street;
+    public final String city;
 
-    public Address(String street, String city) { 
-        this.street = street; 
-        this.city = city; 
-    } 
+    public Address(String street, String city) {
+        this.street = street;
+        this.city = city;
+    }
 
-    @Override 
-    public String toString() { 
-        return "Address{" 
-            + "street='" + street + ''' 
-            + ", city='" + city + ''' 
-            + '}'; 
-    } 
+    @Override
+    public String toString() {
+        return "Address{"
+            + "street='" + street + '''
+            + ", city='" + city + '''
+            + '}';
+    }
 }
 ```
 
 Then I create a Person class. This class hold the first and the last name of a person and his or her address. However the address is optional and can be null.
 
 ```java
-package net.devcouch; 
+package net.devcouch;
 
-import javax.annotation.Nonnull; 
-import javax.annotation.Nullable; 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-public class Person { 
-    public final String firstName; 
-    public final String lastName; 
-    public Address address; 
+public class Person {
+    public final String firstName;
+    public final String lastName;
+    public Address address;
 
-    public Person(String firstName, String lastName) { 
-        this.firstName = firstName; 
-        this.lastName = lastName; 
-    } 
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-    public Person(String firstName, String lastName, Address address) { 
-        this(firstName, lastName); 
-        this.address = address; 
-    } 
+    public Person(String firstName, String lastName, Address address) {
+        this(firstName, lastName);
+        this.address = address;
+    }
 
-    @Nonnull 
-    public String getFullName() { 
-        return firstName + " " + lastName; 
-    } 
+    @Nonnull
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 
-    @Nullable 
-    public String getAddressString() { 
-        if (address == null) { 
-            return null; 
-        } 
-        return address.toString(); 
-    } 
+    @Nullable
+    public String getAddressString() {
+        if (address == null) {
+            return null;
+        }
+        return address.toString();
+    }
 }
 ```
 
 Last but not least I create a Main class which used these both classes.
 
 ```java
-package net.devcouch; 
+package net.devcouch;
 
-public class Main { 
-    public static void main(String[] args) { 
+public class Main {
+    public static void main(String[] args) {
         Person person = new Person("Markus", "Vieghofer");
-        System.out.println("Hello " + person.getFullName()); 
+        System.out.println("Hello " + person.getFullName());
         if (person.getAddressString() != null) {
-            System.out.println(person.getAddressString()); 
-        } 
-   
-        Address address = new Address("street", "city"); 
-        person = new Person("Markus", "Vieghofer", address); 
-        if (person.getFullName() != null) { 
-            System.out.println("Hello, " + person.getFullName()); 
-        } 
+            System.out.println(person.getAddressString());
+        }
+
+        Address address = new Address("street", "city");
+        person = new Person("Markus", "Vieghofer", address);
+        if (person.getFullName() != null) {
+            System.out.println("Hello, " + person.getFullName());
+        }
         if (person.getAddressString() != null) {     
-            System.out.println(person.getAddressString()); 
-        } 
-    } 
+            System.out.println(person.getAddressString());
+        }
+    }
 }
 ```
 
@@ -154,5 +155,3 @@ You can also check out the code at [Github](https://github.com/DevCouch/Nullable
 Using these techniques will help you slim down your code and make it better documented and more secure at the same time.
 
 <span style="color: #999999;">Featured image take from: [https://flic.kr/p/cWebU9](https://flic.kr/p/cWebU9)</span>
-
-

@@ -2,6 +2,7 @@
 layout: post
 title: Android REST Client
 date: '2016-04-22 12:05:58'
+disqus: true
 tags:
 - android
 - rest
@@ -12,14 +13,14 @@ When you develop an Android application that should talk to a server you often h
 
 Until Android 6.0 (which is API level 23) you could use the Apache HTTP Client. However since Android 6.0 this API isn't supported anymore by default. Instead they suggest to use the [HttpURLConnection](http://developer.android.com/reference/java/net/HttpURLConnection.html) .
 
-The reason for this change is that the HttpURLConnection API is more efficient and more transparent to use as stated [here](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client). 
+The reason for this change is that the HttpURLConnection API is more efficient and more transparent to use as stated [here](http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client).
 
 The HttpURLConnection API has a good documentation. It might be a little hard to figure everything out at first, though.
 
-## GET Request 
+## GET Request
 Retrieving a resource via an Http `GET` is the easiest use case. The following code listing (taken and adapted from the official documentation) will show you how.
 
-```java
+{% highlight java %}
 public Object getResource(String resourceUrl) {
   Object result = null;
   URL url = new URL(resourceUrl);
@@ -32,17 +33,17 @@ public Object getResource(String resourceUrl) {
     // react to the exception
   } finally {
     if (urlConnection != null) {
-      urlConnection.disconnect(); 
+      urlConnection.disconnect();
     }
   }
   return result;
-```
-<br>
+{% endhighlight %}
+
 ## POST Request
-Posting an object to a REST API is very similar to the `GET` request. The only thing you have to do additionally is to set the [`setDoOutput(boolean)`](http://developer.android.com/reference/java/net/URLConnection.html#setDoOutput(boolean)) method to true. 
+Posting an object to a REST API is very similar to the `GET` request. The only thing you have to do additionally is to set the [`setDoOutput(boolean)`](http://developer.android.com/reference/java/net/URLConnection.html#setDoOutput(boolean)) method to true.
 
 Also you should set the size of the object you want to send. This can either be done with the [`setChunkedStreamingMode(int)`](http://developer.android.com/reference/java/net/HttpURLConnection.html#setChunkedStreamingMode(int)) or the [`setFixedLengthStreamingMode(int)`](http://developer.android.com/reference/java/net/HttpURLConnection.html#setFixedLengthStreamingMode(int)) method. Which method to use depends whether you know the size of the object to send or not.
-```java
+{% highlight java %}
 public Object postResource(String resourceUrl, Object objectToPost) {
   Object result = null;
   URL url = new URL(resourceUrl);
@@ -65,22 +66,22 @@ public Object postResource(String resourceUrl, Object objectToPost) {
     // react to the exception
   } finally {
     if (urlConnection != null) {
-      urlConnection.disconnect(); 
+      urlConnection.disconnect();
     }
   }
   return result;
-```
-<br>
+{% endhighlight %}
+
 ## PUT Request
 The `PUT` request is very similar to the `POST` request. The only difference is that you have to set the request method to `PUT`. All the other options are the same.
-```java
+{% highlight java %}
 public Object putResource(String resourceUrl, Object objectToPut) {
   Object result = null;
   URL url = new URL(resourceUrl);
   HttpURLConnection urlConnection = null;
   try {
     urlConnection = (HttpURLConnection) url.openConnection();
-    
+
     urlConnection.setDoOutput(true);
 
     // set the request method to PUT
@@ -97,22 +98,22 @@ public Object putResource(String resourceUrl, Object objectToPut) {
     // react to the exception
   } finally {
     if (urlConnection != null) {
-      urlConnection.disconnect(); 
+      urlConnection.disconnect();
     }
   }
   return result;
-```
-<br>
+{% endhighlight %}
+
 ## DELETE Request
 As for the `PUT` request you also have to set the request method for the `DELETE` request explicitly. To execute the request you have to call the `getResponseCode()` method.
 
-```java
+{% highlight java %}
 public boolean deleteResource(String resourceUrl) {
   URL url = new URL(resourceUrl);
   HttpURLConnection urlConnection = null;
   try {
     urlConnection = (HttpURLConnection) url.openConnection();
-    
+
     // set the request method to DELETE
     connection.setRequestMethod("DELETE");
 
@@ -122,8 +123,8 @@ public boolean deleteResource(String resourceUrl) {
     // react to the exception
   } finally {
     if (urlConnection != null) {
-      urlConnection.disconnect(); 
+      urlConnection.disconnect();
     }
   }
   return false;
-```
+{% endhighlight %}

@@ -2,6 +2,7 @@
 layout: post
 title: Android Activities and Fragments
 date: '2015-10-09 09:41:36'
+disqus: true
 tags:
 - android
 ---
@@ -36,5 +37,3 @@ A fragment encapsulates a certain part of your UI. Typically this is a screen on
 When you use Fragment to do all the UI stuff you don’t have to do that in your Activities anymore. The Activities do only the things the should do, glueing everything together and enrich it by some additional logic.
 
 <span style="color: #999999;">Featured image taken from https://flic.kr/p/adM5Y9</span>
-
-

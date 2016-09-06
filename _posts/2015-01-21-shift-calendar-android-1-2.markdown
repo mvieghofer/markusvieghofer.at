@@ -2,6 +2,7 @@
 layout: post
 title: Shift Calendar Android Version 1.2
 date: '2015-01-21 20:35:04'
+disqus: true
 tags:
 - android
 - app-tag
@@ -18,5 +19,3 @@ All defined shift types are currently available for all accounts. This means the
 **Switch time and date formats** – You can choose between some predefined time and date formats. Currently there are only predefined formats you can choose from.
 
 **Bugfixes** – Of course, I also fixed some bugs. Currently all known issues are resolved. In order you find some, please let me know :).
-
-

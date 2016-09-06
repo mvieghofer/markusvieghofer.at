@@ -2,6 +2,7 @@
 layout: post
 title: New Year New Blog
 date: '2016-01-10 17:05:01'
+disqus: true
 ---
 
 Trying something new is important. Last year I learned two new programming languages: [Python](http://devcouch.net/new-year-new-language-python/) and [PHP](http://devcouch.net/a-new-programming-language-again/). This year the first thing I'm going the check out wont be a new programming language but a new blogging platform.
@@ -25,7 +26,7 @@ If you are a developer both these things are a no brainer and there are good tut
 Another thing that I'm still missing is a dashboard for my blog. I have to gather all the data from different places, such as my commenting system, Google Analytics, etc. Although you maybe don't need a dashboard for a blog it is still good to have all necessary information on one page.
 
 As said before Wordpress is definitely not dead and I also don't think Ghost will replace Wordpress. The redesigned [wordpress.com](http://wordpress.com) site is definitely a step in the right direction. It became a lot faster since it is now a single page Javascript app, too. Additionally you can also manage multiple sites at once (which was possible before the redesign, too) which can be very helpful if you have to manage multiple Wordpress instances.
- 
-However there are still some things that aren't perfect such as the automatic reformat of your text if you switch from the HTML view to the text view; this can be really frustrating, especially if you have code listings on your site. 
+
+However there are still some things that aren't perfect such as the automatic reformat of your text if you switch from the HTML view to the text view; this can be really frustrating, especially if you have code listings on your site.
 
 For now I will enjoy the simplicity of Ghost.

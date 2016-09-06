@@ -2,6 +2,7 @@
 layout: post
 title: Why you should upgrade to an SSD
 date: '2015-11-18 19:01:38'
+disqus: true
 tags:
 - hard-drive
 - speed
@@ -34,5 +35,3 @@ After that I opened the back of my laptop and changed the HDD to the SSD. Since 
 Although the first boot took a little longer everything works now and is super fast!
 
 <span style="color: #999999;">Featured image taken from: https://flic.kr/p/vh4GaL</span>
-
-

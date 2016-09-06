@@ -2,6 +2,7 @@
 layout: post
 title: A new programming language... again
 date: '2015-08-01 10:47:30'
+disqus: true
 tags:
 - learning
 - php
@@ -45,5 +46,3 @@ On the way I’m learning I will write about things that challenges me a lot or 
 In the meantime you can check out my PHP example project I hosted [on GitHub](https://github.com/mvieghofer/PHBlog).
 
 <span style="color: #999999;">Featured image take from: https://flic.kr/p/qejPe7</span>
-
-

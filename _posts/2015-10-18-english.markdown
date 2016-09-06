@@ -2,6 +2,7 @@
 layout: post
 title: 4 reasons why you should always code in english
 date: '2015-10-18 19:14:27'
+disqus: true
 tags:
 - development
 - english
@@ -68,5 +69,3 @@ Another reason is that most tutorials are written in english, too. Typically w
 Although this isn’t really a reason, I think that code just have to be in english. Everything else just looks odd.
 
 <span style="color: #999999;">Featured Image taken from [https://flic.kr/p/387TUm](https://flic.kr/p/387TUm)</span>
-
-

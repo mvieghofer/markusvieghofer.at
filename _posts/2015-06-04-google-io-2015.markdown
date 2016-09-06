@@ -2,6 +2,7 @@
 layout: post
 title: Google I/O 2015 Recap
 date: '2015-06-04 22:34:29'
+disqus: true
 tags:
 - android
 - google
@@ -71,5 +72,3 @@ compile 'com.android.support:design:22.2.0'
 you can use all these elements in your app. Also with this library you can easily develop Material Design apps for older platforms, too.
 
 If you want to know more about what was presented at the Google I/O you can [watch the videos](https://events.google.com/io2015/) of the talks online.
-
-

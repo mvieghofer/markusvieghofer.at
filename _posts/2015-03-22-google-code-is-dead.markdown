@@ -2,6 +2,7 @@
 layout: post
 title: Why Google Code is dead and why GitHub is the better choice
 date: '2015-03-22 19:28:04'
+disqus: true
 tags:
 - bitbucket
 - git
@@ -58,5 +59,3 @@ It basically provides all the same features as GitHub does but its [pricing plan
 So unlimited private repos for private projects, startups or small companies. This is also the reason why I use both of them. My private repos are on Bitbucket, my open source repos are on GitHub.
 
 <span style="color: #999999;">Feature Image taken from: [https://flic.kr/p/oFfUm](https://flic.kr/p/oFfUm "Flickr Thomas Hawk")</span>
-
-

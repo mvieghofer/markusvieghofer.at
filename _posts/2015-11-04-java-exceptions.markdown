@@ -2,6 +2,7 @@
 layout: post
 title: How to handle Java exceptions properly
 date: '2015-11-04 19:05:07'
+disqus: true
 tags:
 - excetions
 - java
@@ -43,5 +44,3 @@ Also you should consider to create custom exceptions. With custom exceptions you
 For example if you implement a file based storage and a database storage your user shouldn’t have to deal with SQLExceptions or IOExceptions. You should wrap these exceptions in your custom StorageException.
 
 <span style="color: #999999;">Featured image taken from: [https://flic.kr/p/KEKro](https://flic.kr/p/KEKro)</span>
-
-

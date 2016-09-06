@@ -2,6 +2,7 @@
 layout: post
 title: Why you should use an repository manager
 date: '2015-12-30 19:21:06'
+disqus: true
 tags:
 - artifactory
 - gradle
@@ -37,5 +38,3 @@ Since both tools provide a wide array of features it can be pretty hard to decid
 In such a case I would take artifactory. The reason is that it has a nicer UI and also its documentation is more straight forward. Additionally artifactory helps you to set up your build tools such as Maven or Gradle.
 
 <span style="color: #999999;">Featured image take from: [https://flic.kr/p/degaTz](https://flic.kr/p/degaTz)</span>
-
-

@@ -2,6 +2,7 @@
 layout: post
 title: Turn On/Off Word Wrap in Notepad++
 date: '2014-09-21 15:00:39'
+disqus: true
 tags:
 - how-to
 - notepad
@@ -16,5 +17,3 @@ One thing I always forget is how to enable word wrap in [Notepad++.](http://note
 2. Look for the “Word wrap” option and enable it (you will see a check mark if it is enabled)
 
 There you go, word wrap is enabled and you can read long lines without scrolling.
-
-

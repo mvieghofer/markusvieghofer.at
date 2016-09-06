@@ -2,6 +2,7 @@
 layout: post
 title: Shift Calendar
 date: '2014-11-15 20:30:05'
+disqus: true
 tags:
 - app-tag
 - efficiency
@@ -35,5 +36,3 @@ Then you can:
 Then you apply the dates and all the predefined events are added to the selected calendar. The web app is hosted on [github](https://github.com/mvieghofer/shiftcalendar-web "github"). You may also take a look at it: [http://mvieghofer.github.io/ShiftCalendar/.](http://mvieghofer.github.io/ShiftCalendar/ "ShiftCalendar hosted on github")
 
 <span style="color: #999999;">Featured Image taken from: [https://www.flickr.com/photos/dafnecholet/5374200948/](https://www.flickr.com/photos/dafnecholet/5374200948/ "Flickr").</span>
-
-

@@ -2,6 +2,7 @@
 layout: post
 title: Shift Calendar Android
 date: '2015-01-15 21:02:22'
+disqus: true
 tags:
 - android
 - app-tag
@@ -20,5 +21,3 @@ If you want to check it out, you can download the app from the google play store
 
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)  
 ](https://play.google.com/store/apps/details?id=net.devcouch.shiftcalendar)
-
-
