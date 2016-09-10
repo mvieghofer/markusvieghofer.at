@@ -8,7 +8,7 @@ Some time ago I wrote [a blogpost](http://dev.karriere.at/a/gradle-integrationte
 
 First you have to declare a new sourceSet for your integration tests in your build.gradle file. Additionally I've created the integrationTest task which can be used to execute the integration tests on their own.
 
-```groovy
+{% highlight groovy %}
 // ...
 apply plugin: 'java'
 
@@ -34,7 +34,7 @@ task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
 }
-```
+{% endhighlight %}
 
 If you use IntelliJ IDEA as your IDEA make sure to upgrade to the version 2016.1 or higher. Otherwise it might happen that the gradle source sets don't work as expected (see [this blogpost by Jetbrains](https://blog.jetbrains.com/idea/2016/03/intellij-idea-2016-1-is-here/)).
 

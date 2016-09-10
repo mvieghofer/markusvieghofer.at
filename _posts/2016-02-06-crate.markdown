@@ -15,12 +15,12 @@ A SQL database lets you store your data in a very structured way, supports relat
 
 A NoSql database on the other hand lets you store your data a lot more unstructured way. However, a NoSql database is easier to scale.
 
-Most of the time you just want a SQL database that scales really well. Fortunately there is the scalable SQL database called [Crate](https://crate.io/).
+Most of the time you just want a SQL database that scales really well. Fortunately there is the scalable SQL database called [Crate](https://crate.io/ "Crate").
 
 ## What is Crate?
-Put simply, Crate is a database that is based on [ElasticSearch](https://www.elastic.co/) and lets you execute SQL queries on it.
+Put simply, Crate is a database that is based on [ElasticSearch](https://www.elastic.co/ "ElasticSearch") and lets you execute SQL queries on it.
 
-Crate is very considered to make it clear that they are [not just a SQL wrapper](http://www.slideshare.net/matthiaswahl/turning-a-search-engine-into-a-relational-database/15?src=clipshare) around ElasticSearch. They provide a query engine that talks directly to the ElasticSearch indices. The don't just convert the SQL query to a ElasticSearch query and send it via HTTP to the index.
+Crate is very considered to make it clear that they are [not just a SQL wrapper](http://www.slideshare.net/matthiaswahl/turning-a-search-engine-into-a-relational-database/15?src=clipshare "Crate is not just a SQL wrapper") around ElasticSearch. They provide a query engine that talks directly to the ElasticSearch indices. The don't just convert the SQL query to a ElasticSearch query and send it via HTTP to the index.
 
 ## Fast, Scalable and Easy to Use
 These are the adjectives crate gave themselves. Since Crate is built on top of ElasticSearch the [scalability](https://www.elastic.co/use-cases/github) [should](https://www.elastic.co/use-cases/xing) [be](https://www.elastic.co/use-cases/soundcloud) [given](https://www.elastic.co/use-cases/guardian).
@@ -29,16 +29,14 @@ To test how fast Crate is I've imported 35 million log messages into Crate. Sinc
 
 To make use of that index (called value_ft, for value full text) I've used the ElasticSearch specific MATCH function built in to the Crate SQL dialect ([Here](https://crate.io/docs/reference/sql/fulltext.html) you can find more infos about full text search).
 
-```SQL
+{% highlight sql %}
 SELECT *
 FROM actions
 WHERE MATCH(value_ft, 'jobs') USING phrase
 LIMIT 100;
-```
+{% endhighlight %}
 
 This query took 0.018 seconds, which is pretty fast.
-![Query runtimy](https://res.cloudinary.com/dknh3c1bk/image/upload/v1454786443/Screen_Shot_2016-02-06_at_20.20.22_gzkzgh.png)
+![Query runtimy](/assets/images/crate/fast.png)
 
 If you want to find out if Crate is really easy to use you can either believe me that it is, or you try it out yourself (what you should do!). If you want to install it on your local machine you can take a look at their [documentation](https://crate.io/docs/getting-started/local/). You can also go to my [Github](https://github.com/DevCouch/crate-logs) [repos](https://github.com/DevCouch/crate-ui) to find a my sample implementation.
-
-*Featured image taken from [https://flic.kr/p/4os5oi](https://flic.kr/p/4os5oi)*
