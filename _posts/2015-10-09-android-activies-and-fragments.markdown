@@ -32,8 +32,6 @@ However I think it is very important to write about Fragments right after you le
 
 A fragment encapsulates a certain part of your UI. Typically this is a screen on a smartphone such as a list of items or a detail view of a specific item. By putting all elements necessary for a block of UI elements inside a Fragment it is really easy to create different layouts for different screen sizes or orientations.
 
-[![Android Fragments](http://i1.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021815/fragments_cjiqjp.png?resize=560%2C323 "Android Fragments")](http://i1.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021815/fragments_cjiqjp.png)
+![Android Fragments](/assets/images/android-fragments/fragments.png "Android Fragments")
 
 When you use Fragment to do all the UI stuff you don’t have to do that in your Activities anymore. The Activities do only the things the should do, glueing everything together and enrich it by some additional logic.
-
-<span style="color: #999999;">Featured image taken from https://flic.kr/p/adM5Y9</span>

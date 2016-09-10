@@ -14,7 +14,7 @@ As you can see all the things he predicts sound really crazy. However, this talk
 
 When terminator came out probably nobody even thought about that this might become real someday. Also some years ago everyone you told that in future half human half machine cyborgs will walk across the streets probably thought you were crazy. However, I think we are already on the path to such a future. I mean with the introduction of the google glass a gadget became available that augments ones reality with additional information. When this or a similar technology is further developed and miniaturized contact lenses that augment our reality will be possible. Then we can have a vision similar to the vision of the terminators.
 
-![http://i0.wp.com/static1.purebreak.com/articles/2/76/30/2/@/339316-robotcop-620x0-1.jpg?w=1260](http://i0.wp.com/static1.purebreak.com/articles/2/76/30/2/@/339316-robotcop-620x0-1.jpg?w=1260)
+![Robotcop](/assets/images/cyborgs/robotcop.gif)
 
 If you would connect such contact lenses with the internet you could use the figuratively infinite resources of the cloud to search for any needed information. Things like [face recognition are “no problem” anymore](https://www.facebook.com/publications/546316888800776/ "Facebooks DeepFace"), especially since everybody shares nearly everything in social networks.
 
@@ -22,6 +22,8 @@ Also exoskeletons could help people to become some sort of super humans, even th
 
 Besides these and other similar invention everything is connected nowadays. We not only produce a lot of content every day we also build strong relationships between different pieces of information. This net of connections makes it very hard for us to overlook all the data we actually share with the world. We post something on Instagram and automatically share it on Facebook, too. We identify ourselves on a lot of services with the identity we build on Facebook or google. There are [refrigerators](http://en.wikipedia.org/wiki/Internet_refrigerator "Internet Refrigerators") that are connected to the internet. Maybe someday even our coffee machine tweets us when our coffee is ready.
 
-[![internet-unfollow](http://i0.wp.com/thatsthaway.files.wordpress.com/2014/07/internet-unfollow.jpg?resize=252%2C300)](https://thatsthaway.files.wordpress.com/2014/07/internet-unfollow.jpg)One problem I see with this trend is that the majority of people are not able to think about the consequences. No matter if the reason is that they just don’t understand the technology or they don’t see what somebody could to with it (probably both facts are true).
+![internet-unfollow](/assets/images/cyborgs/internet-unfollow.jpg)
+
+One problem I see with this trend is that the majority of people are not able to think about the consequences. No matter if the reason is that they just don’t understand the technology or they don’t see what somebody could to with it (probably both facts are true).
 
 I’m still not 100% sure if the current trend is going into a good direction or not. I’m still sceptical. We will see what the future brings.

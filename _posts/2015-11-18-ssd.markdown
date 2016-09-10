@@ -33,5 +33,3 @@ First I bought a SSD [hard drive](http://www.amazon.de/gp/product/B00P73B1E4/re
 After that I opened the back of my laptop and changed the HDD to the SSD. Since the content of my hard drive was copied to the SSD I could boot up the laptop as usual.
 
 Although the first boot took a little longer everything works now and is super fast!
-
-<span style="color: #999999;">Featured image taken from: https://flic.kr/p/vh4GaL</span>

@@ -31,7 +31,8 @@ A project hosting platform for open source project without the ability to browse
 
 It seems that GitHub is the new president of project hosting platforms. In the end of 2013 it hits the [10 million project](https://github.com/blog/1724-10-million-repositories "10 million GitHub projects") mark which makes it the largest projects hosting platform out there.
 
-<figure class="wp-caption aligncenter" id="attachment_187" style="width: 300px">![GitHub Office](http://i1.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/h_200,w_300/v1452021888/4858486575_0047411d6e_b_hzqpbd.jpg?resize=300%2C200)<figcaption class="wp-caption-text">GitHub Office, Source: https://flic.kr/p/8pk1MV</figcaption></figure>But why did GitHub grow so massively in the last couple of years?
+![GitHub Office](/assets/images/google-code/github.jpg)
+But why did GitHub grow so massively in the last couple of years?
 
 The main reason GitHub grew so fast was the success of [git](http://git-scm.com/ "Git"). GitHub was one if not the first platform that effectively supported hosting of git projects.
 
@@ -52,10 +53,10 @@ Well, yes. At least if you are an independent developer and don’t want to make
 
 There is one large GitHub competitor, Bitbucket.
 
-<figure class="wp-caption aligncenter" id="attachment_190" style="width: 225px">![Bitbucket Latte](http://i0.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/h_300,w_225/v1452021887/7306781892_2436c099e6_k_shg9wg.jpg?resize=225%2C300)<figcaption class="wp-caption-text">Bitbucket Latte, Source: https://flic.kr/p/c8FaG9</figcaption></figure>Similar to GitHub its a project hosting platform, too. However, it originally was developed for [Mercurial](http://mercurial.selenic.com/ "Mercurial SCM") projects. Git support was added later.
+![Bitbucket Latte](/assets/images/google-code/bitbucket.jpg)
+
+Similar to GitHub its a project hosting platform, too. However, it originally was developed for [Mercurial](http://mercurial.selenic.com/ "Mercurial SCM") projects. Git support was added later.
 
 It basically provides all the same features as GitHub does but its [pricing plans](https://bitbucket.org/plans "Bitbucket Pricing Plans ") are different. If you are only 5 or less contributors, you can have your private repos for free.
 
 So unlimited private repos for private projects, startups or small companies. This is also the reason why I use both of them. My private repos are on Bitbucket, my open source repos are on GitHub.
-
-<span style="color: #999999;">Feature Image taken from: [https://flic.kr/p/oFfUm](https://flic.kr/p/oFfUm "Flickr Thomas Hawk")</span>

@@ -42,7 +42,7 @@ You should decide which of these annotations you want to use and add them to you
 
 Since most IDEs can work with different annotations it doesn’t really matter which annotation you use.
 
-![Configure the annotations to use in IntelliJ](http://i2.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021800/Bildschirmfoto-2015-12-13-um-18.04.40_w9wqsg.png?resize=304%2C373 "Configure the annotations to use in IntelliJ")
+![Configure the annotations to use in IntelliJ](/assets/images/nullable/nullable-setup.png "Configure the annotations to use in IntelliJ")
 
 You have to make sure that your IDE supports the annotation you want to use. Of course, you should also only use the annotations of one vendor to keep your code clean.
 
@@ -51,13 +51,13 @@ You have to make sure that your IDE supports the annotation you want to use. Of 
 
 At first I had to add a dependency to the annotations. I chose to use the findbugs annotations.
 
-```groovy
+{% highlight groovy %}
 dependencies { compile 'com.google.code.findbugs:annotations:3.0.1' }
-```
+{% endhighlight %}
 
 After that I created an Address class that holds a very simplified version of an address object of a person.
 
-```java
+{% highlight java %}
 package net.devcouch;
 
 public class Address {
@@ -77,11 +77,11 @@ public class Address {
             + '}';
     }
 }
-```
+{% endhighlight %}
 
 Then I create a Person class. This class hold the first and the last name of a person and his or her address. However the address is optional and can be null.
 
-```java
+{% highlight java %}
 package net.devcouch;
 
 import javax.annotation.Nonnull;
@@ -115,11 +115,11 @@ public class Person {
         return address.toString();
     }
 }
-```
+{% endhighlight %}
 
 Last but not least I create a Main class which used these both classes.
 
-```java
+{% highlight java %}
 package net.devcouch;
 
 public class Main {
@@ -140,18 +140,16 @@ public class Main {
         }
     }
 }
-```
+{% endhighlight %}
 
 Since I added the <span class="code">@Nonnull</span> annotation to the <span class="code">Person#getFullName()</span> I got a warning from my IDE.
 
-![Warning because of unnecessary null check](http://i0.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021799/Bildschirmfoto-2015-12-13-um-18.42.12_wgmeto.png?resize=418%2C108 "Warning because of unnecessary null check")
+![Warning because of unnecessary null check](/assets/images/nullable/warning.png "Warning because of unnecessary null check")
 
 The <span class="code">@Nullable</span> annotation gets displayed when you show the javadoc of the method.
 
-![@Nullable appears in the javadoc](http://i1.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021799/Bildschirmfoto-2015-12-13-um-19.44.48_esfep6.png?resize=578%2C147 "@Nullable appears in the javadoc")
+![@Nullable appears in the javadoc](/assets/images/nullable/javadoc.png "@Nullable appears in the javadoc")
 
 You can also check out the code at [Github](https://github.com/DevCouch/Nullable).
 
 Using these techniques will help you slim down your code and make it better documented and more secure at the same time.
-
-<span style="color: #999999;">Featured image take from: [https://flic.kr/p/cWebU9](https://flic.kr/p/cWebU9)</span>

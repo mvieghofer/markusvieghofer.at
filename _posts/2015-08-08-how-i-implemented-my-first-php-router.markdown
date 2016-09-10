@@ -18,58 +18,58 @@ To be as flexible as possible it is a good idea to use a router to execute contr
 
 # Simple Router
 
-First I edited the .htaccess file to rewrite the URL and pass it to my index.php file. If I entered the URL http://localhost/post/new the URL would have been modified in a way that it looks like this: http://localhost/index.php?url=post/new. So everything after the http://localhost/ was cut off and set to the url parameter which is then added to the end of the URL.
+First I edited the .htaccess file to rewrite the URL and pass it to my index.php file. If I entered the URL `http://localhost/post/new` the URL would have been modified in a way that it looks like this: `http://localhost/index.php?url=post/new`. So everything after the `http://localhost/` was cut off and set to the url parameter which is then added to the end of the URL.
 
 The .htaccess file I use look like the following:
 
-```bash
+{% highlight bash %}
 Options -MultiViews
 RewriteEngine On
 RewriteBase /public/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$  index.php?url=$1 [QSA,L]
-```
+{% endhighlight %}
 
 Now the url I request is passed to the index.php and can be processed.
 
-To do this I wrote a little class that accomplishes this. This class originally had two public methods: (1) an <span class="code">add</span> method and (2) a <span class="code">run</span> method.
+To do this I wrote a little class that accomplishes this. This class originally had two public methods: (1) an `add` method and (2) a `run` method.
 
 You could add a mapping between an url and a controller method to the router and when you are done you just had to execute the run method to start the controller. Whenever a new url was requested the router was initialized and processed the url parameter in the run method.
 
-The <span class="code">add</span> method of the router class looks like the following:
+The `add` method of the router class looks like the following:
 
-```php
+{% highlight php %}
 public function add($uri, $function) {
     $uri = str_replace('/', '\/', $uri);
     $this->urlMap[$uri] = $function;
 }
-```
+{% endhighlight %}
 
 It takes an url parameter and maps it to the function passed. This can be either the name of a controller as well as the method that should be invoked separated by a # or a function.
 
 Example calls for this method could look like this:
 
-```php
+{% highlight php %}
 $router = new Router();
 $router->add('/home', 'HomeController#indexAction');
 $router->add('/about', function() {
     $controller = new AboutController();
     $controller->indexAction();
 });
-```
+{% endhighlight %}
 
-After you added the url patterns and the corresponding functions to execute the router has to actually map the incoming url to the configured urls. For doing this I’ve implemented a <span class="code">run</span> method.
+After you added the url patterns and the corresponding functions to execute the router has to actually map the incoming url to the configured urls. For doing this I’ve implemented a `run` method.
 
 The run method iterates over all mapped url and checks them against the incoming url. If a url matches the incoming url either the function that is mapped to the url is executed.
 
 This is either a real function that just has to be called or it is a string representation of the controller and the function of the controller that should be called. In the second case the string is split so that I have the controller step and the function to call in an array.
 
-I can build the path to the controller and include it to my PHP script. Then I can call the method of the controller by using the <span class="code">call\_user\_func\_array</span> function.
+I can build the path to the controller and include it to my PHP script. Then I can call the method of the controller by using the `call_user_func_array` function.
 
-The parameters passed to that function are extracted by the getParamsFromUrl function. This function basically compares the mapped url with the incoming url and cuts off everything from the incoming url that is also defined in the mapped url. For example, when the mapped url is <span class="code">/post/\d+</span> and the incoming url is <span class="code">/post/15</span> the extracted parameters are <span class="code">15</span>.
+The parameters passed to that function are extracted by the getParamsFromUrl function. This function basically compares the mapped url with the incoming url and cuts off everything from the incoming url that is also defined in the mapped url. For example, when the mapped url is `/post/\d+` and the incoming url is `/post/15` the extracted parameters are `15`.
 
-```php
+{% highlight php %}
 public function run() {
     $url = '/';
     if (isset($_GET['url'])) {
@@ -109,7 +109,7 @@ private function mapUrl($url, $key, $function) {
 }
 
 private function getParamsFromUrl($url, $regex) {
-    if (isset($url) &amp;&amp; isset($regex)) {
+    if (isset($url) && isset($regex)) {
         $regex = str_replace('\/', '/', $regex);
         $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
         $regex = explode('/', filter_var(rtrim($regex, '/'), FILTER_SANITIZE_URL));
@@ -124,11 +124,11 @@ private function getParamsFromUrl($url, $regex) {
         return $url;
     }
 }
-```
+{% endhighlight %}
 
 After implementing this function it has to be called. This is done in the index.php file right after all urls are added to the router.
 
-```php
+{% highlight php %}
 $router = new Router();
 $router->add('/home', 'HomeController#indexAction');
 $router->add('/about', function() {
@@ -136,18 +136,18 @@ $router->add('/about', function() {
     $controller->indexAction();
 });
 $router->run();
-```
+{% endhighlight %}
 
 
 # Advanced Router
 
-To be able to do more than just add urls to function mappings I’ve extended the router and added some more functionality. Instead of having just an add method I’ve added a <span class="code">get</span>, <span class="code">post</span>, <span class="code">put</span> and <span class="code">delete</span> method. Also the <span class="code">add</span> method got another parameter, an array of methods.
+To be able to do more than just add urls to function mappings I’ve extended the router and added some more functionality. Instead of having just an add method I’ve added a `get`, `post`, `put` and `delete` method. Also the `add` method got another parameter, an array of methods.
 
-As you already guessed, the <span class="code">get</span> method executes a function if a certain url is accessed via the HTTP get method. For the <span class="code">post</span>, <span class="code">put</span> and <span class="code">delete</span> method it is similar.
+As you already guessed, the `get` method executes a function if a certain url is accessed via the HTTP get method. For the `post`, `put` and `delete` method it is similar.
 
-The new <span class="code">add</span> method does basically the same thing as before, it just stores the urls and functions in a matrix where the second dimension are the HTTP methods.
+The new `add` method does basically the same thing as before, it just stores the urls and functions in a matrix where the second dimension are the HTTP methods.
 
-```php
+{% highlight php %}
 public function get($uri, $function) {
     $this->add($uri, $function, ['GET']);
 }
@@ -173,11 +173,11 @@ public function add($uri, $function, array $methods) {
         $this->urlMap[$uri][$method] = $function;
     }
 }
-```
+{% endhighlight %}
 
-After this change also the <span class="code">run</span> method has to be adapted. The correct method for the current HTTP method has to be used.
+After this change also the `run` method has to be adapted. The correct method for the current HTTP method has to be used.
 
-```php
+{% highlight php %}
 public function run() {
     $method = $_SERVER['REQUEST_METHOD'];
     $url = '/';
@@ -190,11 +190,11 @@ public function run() {
         }
     }
 }
-```
+{% endhighlight %}
 
-After these changes were implemented the configuration of the router has to be adapted. All urls that should only be mapped for a certain HTTP method are mapped using the corresponding method. All urls that should be mapped for multiple methods are mapped using the <span class="code">add</span> method. For this case also the methods have to be passed.
+After these changes were implemented the configuration of the router has to be adapted. All urls that should only be mapped for a certain HTTP method are mapped using the corresponding method. All urls that should be mapped for multiple methods are mapped using the `add` method. For this case also the methods have to be passed.
 
-```php
+{% highlight php %}
 $router = new Router();
 $router->get('/home', 'HomeController#getAction');
 $router->post('/home', 'HomeController#postAction');
@@ -203,7 +203,4 @@ $router->add('/about', function() {
     $controller->indexAction();
 }, ['GET', 'POST', 'DELETE', 'PUT']);
 $router->run();
-```
- 
-
-<span style="color: #999999;">Featured image take from https://flic.kr/p/hW31Na</span>
+{% endhighlight %}

@@ -8,7 +8,7 @@ tags:
 ---
 
 
-Last year I’ve written [a post](http://devcouch.net/roboguice-makes-android-development-more-awesome/) about how [RoboGuice](https://github.com/roboguice/roboguice) helps you to make Android programming a lot more readable. Shortly after I’ve published my article a new version of RoboGuice, version 3, was released.
+Last year I’ve written [a post](/roboguice-makes-android-development-more-awesome/) about how [RoboGuice](https://github.com/roboguice/roboguice) helps you to make Android programming a lot more readable. Shortly after I’ve published my article a new version of RoboGuice, version 3, was released.
 
 Today I want to review the newest version and point out some very cool features.
 
@@ -32,23 +32,22 @@ I assume that you use gradle as build automation tool. If so, including RoboGuic
 
 All you need to do is to add these two lines to your build.gradle file
 
-```groovy
+{% highlight groovy %}
 dependencies {
     compile 'org.roboguice:roboguice:3.+'
     provided 'org.roboguice:roboblender:3.+'
 }
-```
+{% endhighlight %}
 
 Of course you don’t have to use gradle. You can also include the library via [Maven](https://github.com/roboguice/roboguice/wiki/InstallationMaven) or [manually](https://github.com/roboguice/roboguice/wiki/InstallationNonMaven).
 
-As I said before RoboBlender is optional. You don’t have to include it to your app. However, if you don’t want to use RoboBlender you have to disable it. This can either be be done by using an environment variable <span class="code">roboguice.useAnnotationDatabases=false</span> or doing it programmatically (this has to be done before creating the first injector) <span class="code">RoboGuice.setUseAnnotationDatabases(false)</span>
-
+As I said before RoboBlender is optional. You don’t have to include it to your app. However, if you don’t want to use RoboBlender you have to disable it. This can either be be done by using an environment variable `roboguice.useAnnotationDatabases=false` or doing it programmatically (this has to be done before creating the first injector) `RoboGuice.setUseAnnotationDatabases(false)`.
 
 # Example
 
 After you configured everything you can start using RoboGuice in your app. The following example shows the most basic setup for an activity.
 
-```java
+{% highlight java %}
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboActivity {
     @InjectView(R.id.text_view)
@@ -60,6 +59,4 @@ public class MainActivity extends RoboActivity {
         textView.setText("Hello World!");
     }
 }
-```
-
-<span style="color: #999999;">Featured Image taken from: http://bit.ly/1RnLxHZ</span>
+{% endhighlight %}

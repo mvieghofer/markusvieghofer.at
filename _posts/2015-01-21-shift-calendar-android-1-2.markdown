@@ -12,7 +12,7 @@ tags:
 
 As you may now I recently published an [Android app](https://play.google.com/store/apps/details?id=net.devcouch.shiftcalendar "ShiftCalendar Android app") that helps you add shifts to your google calendar. Now I just published the newest version of the app. Even though there are just minor changes I wanted to notify you about it.
 
-**Logout** – The first new feature that was added to the app is that you have the option to logout. This was something I just forgot previously :P. Now you can switch between accounts easily.
+**Logout** – The first new feature that was added to the app is that you have the option to logout. This was something I just forgot previously :wink:. Now you can switch between accounts easily.
 
 All defined shift types are currently available for all accounts. This means they aren’t tied to the account but to the app. I haven’t decided yet if I will change this. In case you want to help me decide, leave a comment.
 
