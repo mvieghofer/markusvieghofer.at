@@ -5,7 +5,7 @@ date: '2016-01-10 17:05:01'
 disqus: true
 ---
 
-Trying something new is important. Last year I learned two new programming languages: [Python](/new-year-new-language-python/ "Python") and [PHP](/a-new-programming-language-again/ "PHP"). This year the first thing I'm going the check out wont be a new programming language but a new blogging platform.
+Trying something new is important. Last year I learned two new programming languages: [Python](/new-year-new-language-python "Python") and [PHP](/a-new-programming-language-again "PHP"). This year the first thing I'm going the check out wont be a new programming language but a new blogging platform.
 
 Since this year my blog runs on the [ghost](https://ghost.org/ "Ghost") platform. I've already tried ghost [a while ago](/ghost-just-a-blogging-platform/ "Ghost - Just a blogging platform") and I was impressed. However at this time my blog ran on Wordpress and I didn't want to switch, partly because at this time ghost was still in a very early phase.
 
