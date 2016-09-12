@@ -10,5 +10,4 @@ rm -r assets
 rm -r resources
 rm about.md
 cp -R raw/* .
-rm -r raw
-touch .nojekyll
+#rm -r raw
