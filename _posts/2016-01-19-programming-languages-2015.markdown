@@ -8,8 +8,8 @@ tags:
 - programming-language
 - python
 - c
-- c-2
-- c-3
+- c++
+- c#
 - ruby
 - javascript
 ---

@@ -23,7 +23,7 @@ This can lead to the problem of multiple inheritance. When one of your classes i
 
 This could be done this way:
 
-```java
+{% highlight java %}
 public interface A {
     default void bar(String message) {
         System.out.println("Hello, " + message);
@@ -41,7 +41,7 @@ public class Foo implements A, B {
         A.super.bar(message);
     }
 }
-```
+{% endhighlight %}
 
 
 ## Will default methods be the end of utility classes?
@@ -59,5 +59,3 @@ Another point against default methods are that you might not want to let your c
 As always it is a matter of taste and dependent on the actual use case.
 
 A project that contains the default method show cases is also available on [GitHub](https://github.com/DevCouch/DefaultMethods).
-
-<span style="color: #999999;">Featured image taken from: [https://flic.kr/p/iQbXu9](https://flic.kr/p/iQbXu9)</span>

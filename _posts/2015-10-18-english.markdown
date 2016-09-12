@@ -67,5 +67,3 @@ Another reason is that most tutorials are written in english, too. Typically w
 # Bonus: It just doesn’t look right
 
 Although this isn’t really a reason, I think that code just have to be in english. Everything else just looks odd.
-
-<span style="color: #999999;">Featured Image taken from [https://flic.kr/p/387TUm](https://flic.kr/p/387TUm)</span>

@@ -39,5 +39,3 @@ Also they can provide a way of receiving feedback from your customers. When TV s
 Even though there are a lot of reasons to use hashtags, you should never overuse them.
 
 <iframe allowfullscreen="allowfullscreen" frameborder="0" height="315" src="//www.youtube.com/embed/57dzaMaouXA" width="560"></iframe>
-
-<span style="color: #808080;">Featured image source: [http://www.flickr.com/photos/mikecogh/5941302441/](http://www.flickr.com/photos/mikecogh/5941302441/)</span>

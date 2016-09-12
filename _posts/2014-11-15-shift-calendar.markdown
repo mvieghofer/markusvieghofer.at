@@ -20,7 +20,7 @@ The main feature I was missing was that you can’t define event templates that 
 
 After living with this hassle for some time, I’ve decided to create a little webapp that helps me adding the shifts to my calendar.
 
-[![Shift Calendar Web](http://i1.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/h_162,w_300/v1452021930/demo_Screenshot_innr0l.png?resize=300%2C162)](http://i2.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021930/demo_Screenshot_innr0l.png)
+[![Shift Calendar Web](/assets/images/shift-calendar/demo-thumbnail.png)](/assets/images/shift-calendar/demo.png)
 
 The main setup of the app is:
 
@@ -34,5 +34,3 @@ Then you can:
 3. Select the dates the shift should be added on
 
 Then you apply the dates and all the predefined events are added to the selected calendar. The web app is hosted on [github](https://github.com/mvieghofer/shiftcalendar-web "github"). You may also take a look at it: [http://mvieghofer.github.io/ShiftCalendar/.](http://mvieghofer.github.io/ShiftCalendar/ "ShiftCalendar hosted on github")
-
-<span style="color: #999999;">Featured Image taken from: [https://www.flickr.com/photos/dafnecholet/5374200948/](https://www.flickr.com/photos/dafnecholet/5374200948/ "Flickr").</span>

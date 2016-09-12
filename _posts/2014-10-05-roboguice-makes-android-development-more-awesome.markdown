@@ -19,7 +19,7 @@ So what is it? It’s a dependency injection framework that helps you dealing wi
 
 A typical Android class could look like this:
 
-```java
+{% highlight java %}
 class AndroidWay extends Activity {
     TextView name;
     ImageView thumbnail;
@@ -38,11 +38,11 @@ class AndroidWay extends Activity {
         name.setText("Hello, " + myName);
     }
 }
-```
+{% endhighlight %}
 
 With RoboGuice all the boilerplate code can be removed. Everthing is just intialized by the framework which results in code similar to this:
 
-```java
+{% highlight java %}
 class RoboWay extends RoboActivity {
     @InjectView(R.id.name)
     TextView name;
@@ -65,8 +65,6 @@ class RoboWay extends RoboActivity {
         name.setText("Hello, " + myName);
     }
 }
-```
+{% endhighlight %}
 
 As you can see, the lines of the onCreate method were reduced dramatically which improves the readability of the method a lot. Since I use this framework my Android code looks a lot better. You should definitely try it out!
-
-Image Source: [https://www.flickr.com/photos/rbulmahn/](https://www.flickr.com/photos/rbulmahn/ "https://www.flickr.com/photos/rbulmahn/")

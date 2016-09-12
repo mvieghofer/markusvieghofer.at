@@ -29,7 +29,6 @@ about: 'about.html'
 
 <main id="content" class="content" role="main">
 
-
     <div class="extra-pagination inner">
         {% include pagination.html %}
     </div>
@@ -51,9 +50,8 @@ about: 'about.html'
             {% if post.categories.size > 0 %}
                 {{ post.categories | array_to_sentence_string | prepend: 'on ' }}
             {% endif %}
-            <time class="post-date" datetime="{{ post.date | date:"%Y-%m-%d" }}">
-                {{ post.date | date_to_string }}
-            </time>
+            {% include post-date.html date=post.date %}
+            {% include tag-list.html tags=post.tags %}
         </footer>
     </article>
 

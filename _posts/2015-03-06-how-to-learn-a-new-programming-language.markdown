@@ -50,5 +50,3 @@ However start small and get bigger with the time. It is easy to get overwhelmed 
 ## One last special tip:
 
 It would be a really good idea to let others (more experienced people) comment you code. Either you know somebody who can do that or you use [codereview.stackexchange.com](http://codereview.stackexchange.com/ "Code Review on StackExchange") or any other online platform.
-
-<span style="color: #808080;">Feature Image take from: [http://goo.gl/AgpHJa](http://goo.gl/AgpHJa)</span>

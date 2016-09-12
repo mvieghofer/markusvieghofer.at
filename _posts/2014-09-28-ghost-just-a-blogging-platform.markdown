@@ -21,6 +21,6 @@ I thought of this quote because ghost is a truly minimalistic blogging platform.
 
 The coolest feature of it is the split mode of the editor. You write one one side and get a preview on the other side. That’s how it should work (at least on a large screen).
 
-[![Ghost editor](http://i2.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/h_153,w_300/v1452021898/ghost_uyghpw.png?resize=300%2C153)](http://i0.wp.com/res.cloudinary.com/dknh3c1bk/image/upload/v1452021898/ghost_uyghpw.png)
+[![Ghost editor](/assets/images/ghost/ghost-thumbnail.png)](/assets/images/ghost/ghost.png)
 
 Even though ghost is just at version 0.4.2 (at the time of this writing) it is a great tool. There there are still some things to improve but I would strongly encourage you to take at it. Since some time there is also the possibility to try it out for free (or you take a look at my playground installation [here](http://ghostblog-mvieghofer.rhcloud.com/)).

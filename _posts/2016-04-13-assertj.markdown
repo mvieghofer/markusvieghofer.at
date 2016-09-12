@@ -19,7 +19,7 @@ When you use JUnit you have methods such as <span class="code">assertEquals</sp
 
 The following example implementation of unit tests show the difference between AssertJ and standard JUnit tests.
 
-```java
+{% highlight java %}
 @Test
 public void testZooJunit() {
     List<Animal> expectedAnimals = new ArrayList<>();
@@ -33,13 +33,13 @@ public void testZooJunit() {
 public void testZoo() {
     assertThat(zoo.animals).containsOnly(dog, monkey, lion);
 }
-```
+{% endhighlight %}
 
 As you can see the AssertJ test tells you in much less code exactly was it does. This make such tests a lot more readable.
 
 Besides the standard assertions AssertJ also provides a way to generate customized assertion classes. This can either be done via the command line or your build tool, such as Maven. Such a generated assertion class can look like this:
 
-```java
+{% highlight java %}
 /** ... */
 public class AnimalAssert extends AbstractAssert<AnimalAssert, Animal> {
     // Constructor
@@ -61,11 +61,11 @@ public class AnimalAssert extends AbstractAssert<AnimalAssert, Animal> {
         // return the current assertion for method chaining return this;
     }
 }
-```
+{% endhighlight %}
 
 With these generated classes you can do assertions that are customized for your objects. Of course, you can implement your own assertion methods in these classes, too. An example of a test that uses the <span class="code">AnimalAssert</span> class can look like this:
 
-```java
+{% highlight java %}
 import static net.devcouch.assertj.AnimalAssert.assertThat;
 public class AnimalTest {
     // setup
@@ -73,6 +73,6 @@ public class AnimalTest {
         assertThat(animal).hasName(ANIMAL_NAME);
     }
 }
-```
+{% endhighlight %}
 
 If you want to know more please read the [docs](http://joel-costigliola.github.io/assertj/assertj-core.html) or head over to [GitHub](https://github.com/DevCouch/Assertj-Showcase) and check out my AssertJ showcase.
