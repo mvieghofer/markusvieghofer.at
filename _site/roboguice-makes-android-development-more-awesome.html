@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">RoboGuice makes Android development more awesome</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2014-10-05">05 Oct 2014</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/android">#android</a>
+    
+        <a href="/tag/programming">#programming</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2014-10-05">05 Oct 2014</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">RoboGuice makes Android development more awesome</h1> -->
+
+        <section class="post-content">
+            <p>I recently discovered an awesome Android framework, <a href="https://github.com/roboguice/roboguice" title="RoboGuice">RoboGuice</a>. On the Github page they state</p>
+
+<blockquote>
+  <p>RoboGuice 2 smoothes out some of the wrinkles in your Android development experience and makes things simple and fun.</p>
+</blockquote>
+
+<p>and this is absolutely true. I just use it some days but it makes everything even more awesome.</p>
+
+<p>So what is it? It’s a dependency injection framework that helps you dealing with boilerplate code such as initializing the view, getting objects from the intent, getting system service, etc. All that stuff that you don’t want to write anyway can be removed.</p>
+
+<p>A typical Android class could look like this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">AndroidWay</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
+    <span class="n">TextView</span> <span class="n">name</span><span class="o">;</span>
+    <span class="n">ImageView</span> <span class="n">thumbnail</span><span class="o">;</span>
+    <span class="n">LocationManager</span> <span class="n">loc</span><span class="o">;</span>
+    <span class="n">Drawable</span> <span class="n">icon</span><span class="o">;</span>
+    <span class="n">String</span> <span class="n">myName</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">);</span>
+        <span class="n">thumbnail</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">thumbnail</span><span class="o">);</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="o">(</span><span class="n">LocationManager</span><span class="o">)</span> <span class="n">getSystemService</span><span class="o">(</span><span class="n">Activity</span><span class="o">.</span><span class="na">LOCATION_SERVICE</span><span class="o">);</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">getResources</span><span class="o">().</span><span class="na">getDrawable</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">icon</span><span class="o">);</span>
+        <span class="n">myName</span> <span class="o">=</span> <span class="n">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">app_name</span><span class="o">);</span>
+        <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">myName</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>With RoboGuice all the boilerplate code can be removed. Everthing is just intialized by the framework which results in code similar to this:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">class</span> <span class="nc">RoboWay</span> <span class="kd">extends</span> <span class="n">RoboActivity</span> <span class="o">{</span>
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
+    <span class="n">TextView</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">thumbnail</span><span class="o">)</span>
+    <span class="n">ImageView</span> <span class="n">thumbnail</span><span class="o">;</span>
+
+    <span class="nd">@InjectResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">icon</span><span class="o">)</span>
+    <span class="n">Drawable</span> <span class="n">icon</span><span class="o">;</span>
+
+    <span class="nd">@InjectResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">app_name</span><span class="o">)</span>
+    <span class="n">String</span> <span class="n">myName</span><span class="o">;</span>
+
+    <span class="nd">@Inject</span>
+    <span class="n">LocationManager</span> <span class="n">loc</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">main</span><span class="o">);</span>
+        <span class="n">name</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">myName</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>As you can see, the lines of the onCreate method were reduced dramatically which improves the readability of the method a lot. Since I use this framework my Android code looks a lot better. You should definitely try it out!</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=RoboGuice makes Android development more awesome&amp;url=http://markusvieghofer.at/roboguice-makes-android-development-more-awesome"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/roboguice-makes-android-development-more-awesome"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/roboguice-makes-android-development-more-awesome"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2016 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+</html>
