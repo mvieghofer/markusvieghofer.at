@@ -1,13 +1,11 @@
 #!/bin/sh
 git checkout gh-pages
 git pull
-git merge master
+git merge -X theirs master
 jekyll build
-mkdir raw
-cp -R _site/* raw/
+cp -R _site/* .
 rm -r _*
-rm -r assets
-rm -r resources
 rm about.md
-cp -R raw/* .
-#rm -r raw
+git add .
+git commit -m "latest version"
+git push origin gh-pages
