@@ -2,11 +2,10 @@
 custom_css: tags
 layout: page
 ---
-
 <main id="content" class="content" role="main">
 	<ul class="tagList">
-		{% for tag in tags %}
-		<li class="tagList-item"><a href="#{{ tag | slugify }}">#{{ tag }}</a></li>
+		{% for tag in page.tags %}
+		<li class="tagList-item"><a href="/tag/{{ tag }}">#{{ tag }}</a></li>
 		{% endfor %}
 	</ul>
 </main>

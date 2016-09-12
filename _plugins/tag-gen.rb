@@ -1,4 +1,3 @@
-require "set"
 module Jekyll
 
     class TagPage < Page
@@ -34,12 +33,14 @@ module Jekyll
         def generate(site)
             if site.layouts.key? 'tag_index'
                 dir = 'tag'
-                allTags = Set.new
+                allTags = []
                 site.tags.keys.each do |tag|
                     write_tag_page(site, File.join(dir, tag), tag)
-                    allTags.add(tag)
+                    if !allTags.include? tag
+                        allTags.push(tag)
+                    end
                 end
-                write_tag_index(site, dir, allTags)
+                write_tag_index(site, dir, allTags.sort)
             end
         end
 

@@ -4,8 +4,6 @@ img.tag-author-img {
 }
 
 .tagList {
-  width: 80%;
-  max-width: 710px;
   margin: 4rem auto;
   padding:0;
 }
