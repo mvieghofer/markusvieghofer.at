@@ -2,7 +2,7 @@
 git checkout gh-pages
 git pull
 git merge master
-jekyll
+jekyll build
 mkdir raw
 cp -R _site/* raw/
 rm -r _*
