@@ -5,7 +5,7 @@ date: '2015-01-21 20:35:04'
 disqus: true
 tags:
 - android
-- app-tag
+- app
 - shiftcalendar
 ---
 

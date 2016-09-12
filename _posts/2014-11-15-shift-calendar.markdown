@@ -4,7 +4,7 @@ title: Shift Calendar
 date: '2014-11-15 20:30:05'
 disqus: true
 tags:
-- app-tag
+- app
 - efficiency
 - google-calendar
 ---
