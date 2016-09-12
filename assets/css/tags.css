@@ -2,3 +2,27 @@ img.tag-author-img {
     padding: 0;
     margin-right: 9px
 }
+
+.tagList {
+  width: 80%;
+  max-width: 710px;
+  margin: 4rem auto;
+  padding:0;
+}
+
+.tagList-item {
+  display: inline-block;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  margin:0;
+}
+
+.tagList-item a {
+  text-decoration: none;
+  color: #9EABB3;
+  margin: 0 1rem 0 0;
+}
+
+.tagList-item a:hover {
+    text-decoration: underline;
+}
