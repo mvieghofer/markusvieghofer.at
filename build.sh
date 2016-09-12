@@ -1,7 +1,7 @@
 #!/bin/sh
 git checkout gh-pages
 git pull
-git merge -X theirs master
+git merge -X theirs -m "merged master to gh-pages" master
 jekyll build
 cp -R _site/* .
 rm -r _*
