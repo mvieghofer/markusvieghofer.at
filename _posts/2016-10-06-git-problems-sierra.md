@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to fix a broken git after upgrading to macOS Sierra"
-date: 2016-10-06 18:29:42
+date: 2016-10-06 16:29:42
 tags: [git, macOS, sierra]
 ---
 Yesterday I've upgraded my Mac to the new macOS Sierra. Everything worked great
