@@ -3,10 +3,8 @@ layout: post
 title: Android REST Client
 date: '2016-04-22 12:05:58'
 disqus: true
-tags:
-- android
-- rest
-- http
+tags: [android, rest, http]
+meta_description: "Since Android 6.0 the Apache HTTP Client was deprecated. This is how you can write an Android REST Client using the HttpURLConnection."
 ---
 
 When you develop an Android application that should talk to a server you often have to consume a REST API. There are some ways how you can do that. In the following post I will show you how the way recommended by the Android docs works.

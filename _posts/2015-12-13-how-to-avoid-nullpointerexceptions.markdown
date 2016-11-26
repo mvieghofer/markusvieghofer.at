@@ -7,6 +7,7 @@ tags:
 - design-pattern
 - java
 - 'null'
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
 ---
 
 

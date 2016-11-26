@@ -3,6 +3,7 @@ layout: post
 title: New Year New Blog
 date: '2016-01-10 17:05:01'
 disqus: true
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
 ---
 
 Trying something new is important. Last year I learned two new programming languages: [Python](/new-year-new-language-python "Python") and [PHP](/a-new-programming-language-again "PHP"). This year the first thing I'm going the check out wont be a new programming language but a new blogging platform.

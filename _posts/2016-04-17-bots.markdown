@@ -3,12 +3,8 @@ layout: post
 title: Bots are the new thing!
 date: '2016-04-17 12:07:55'
 disqus: true
-tags:
-- facebook
-- slack
-- telegram
-- messenger
-- bots
+tags: [facebook, slack, telegram, messenger, bots]
+meta_description: "Apps are out and bots are in. Every of the major messengers support them and there is already a great number of little software helpers running in those messengers."
 ---
 
 Remember some time ago, when everybody talked about apps? Now nobody does that anymore. Bots are the new thing.

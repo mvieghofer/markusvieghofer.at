@@ -12,6 +12,7 @@ tags:
 - c#
 - ruby
 - javascript
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
 ---
 
 The year 2015 is over. This means that everybody is reflecting the old year and makes plans for the new year.

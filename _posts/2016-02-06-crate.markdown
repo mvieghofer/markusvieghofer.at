@@ -7,6 +7,7 @@ tags:
 - database
 - crate
 - elasticsearch
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
 ---
 
 When you have to choose a database for your project, the first thing you have to decide whether you pick a SQL database or a NoSql Database.

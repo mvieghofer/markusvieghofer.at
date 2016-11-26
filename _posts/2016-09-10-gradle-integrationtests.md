@@ -3,6 +3,7 @@ layout: post
 title: "Integration Testsets with Gradle"
 date: 2016-09-10 08:29:42
 tags: [java, gradle, intelliJ]
+meta_description: "How to execute your integration tests with gradle independently from your unit tests."
 ---
 Some time ago I wrote [a blogpost](http://dev.karriere.at/a/gradle-integrationtests) on our companies Blog about how we accomplished to create an integration-testset for our gradle projects. Since this post was written in german I wanted to translate and repost it here.
 
