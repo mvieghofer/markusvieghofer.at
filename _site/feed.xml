@@ -5,9 +5,87 @@
     <description>Software made in Österreich</description>
     <link>http://markusvieghofer.at//</link>
     <atom:link href="http://markusvieghofer.at//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 26 Nov 2016 21:04:14 +0100</pubDate>
-    <lastBuildDate>Sat, 26 Nov 2016 21:04:14 +0100</lastBuildDate>
+    <pubDate>Tue, 29 Nov 2016 21:17:46 +0100</pubDate>
+    <lastBuildDate>Tue, 29 Nov 2016 21:17:46 +0100</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Docker Bootcamp</title>
+        <description>&lt;p&gt;I wanted check out Docker for quiet a while now. Eventually I found the time to do so and started to look for some learning materials online. Since Docker exists since three years now there are tons of materials out there. Therefore I’m not going to write an in depth tutorial about all the various commands but rather a quick overview of the technology.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-docker&quot;&gt;What is Docker?&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Docker is an open-source project that automates the deployment of Linux applications inside software containers.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is how &lt;a href=&quot;https://en.wikipedia.org/wiki/Docker_(software)&quot; target=&quot;_blank&quot;&gt;wikipedia&lt;/a&gt; defines it. Docker itself describes it similarly with &lt;a href=&quot;https://www.docker.com/what-docker&quot; target=&quot;_blank&quot;&gt;the following words&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Docker containers wrap a piece of software in a complete filesystem that contains everything needed to run: code, runtime, system tools, system libraries – anything that can be installed on a server. This guarantees that the software will always run the same, regardless of its environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Summarized, Docker is a container technology that executes your software in a sandboxed environment.&lt;/p&gt;
+
+&lt;p&gt;Each of these containers can be shared via a public or private repository (similar to maven artifacts). Docker runs its own public repository, the &lt;a href=&quot;https://hub.docker.com/&quot; target=&quot;_blank&quot;&gt;Docker Hub&lt;/a&gt;, where you can download prebuilt images and share your own images.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-docker-not&quot;&gt;What is Docker not?&lt;/h2&gt;
+&lt;p&gt;Docker is no virtual machine technology. In contrast to virtual machines Docker containers don’t boot up their own operating system but depend on the kernel of their host OS. When a Docker image is pulled on another machine than it was built on it uses the host OS of that new machine.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;First you have to install Docker on your laptop. For instructions on this please check out the &lt;a href=&quot;https://docs.docker.com/engine/installation/&quot; target=&quot;_blank&quot;&gt;official docs&lt;/a&gt; on that topic.&lt;/p&gt;
+
+&lt;p&gt;To run your first container just type in &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run ubuntu&lt;/code&gt;. This will pull down the Ubuntu image and run it on your laptop. Since we didn’t execute any command, the image is exited immediately. If you want to do something more spectacular you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run -it ubuntu sh&lt;/code&gt;. This will start and interactive shell in your ubuntu container you can play with. When you want to exit the container just type in the &lt;code class=&quot;highlighter-rouge&quot;&gt;exit&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;After you started your first container you can take a look at all the images Docker already pulled down. To do this run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker images&lt;/code&gt; and you should get an output that looks something like this:
+&lt;script src=&quot;https://gist.github.com/mvieghofer/21a0d7d3611ccfe62cce9cce691e914d.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course, you can also run a Docker container as a daemon. For example you could start an &lt;a href=&quot;https://www.elastic.co/products/elasticsearch&quot; target=&quot;_blank&quot;&gt;elasticsearch&lt;/a&gt; container that runs in the background like this: &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run -d elasticsearch&lt;/code&gt;. The &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; option tells Docker to deamonize the container.&lt;/p&gt;
+
+&lt;p&gt;Elasticsearch runs on the port 9200 by default, but since it is running inside a container you cannot reach it from outside. To do this we need to map the port that is used inside the container to a port that can be reached from outside the container. If you wanted to publish all internal ports to random ports you can also add the &lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt; option. If you want to publish only specific ports (e.g. its default http port) you can add the &lt;code class=&quot;highlighter-rouge&quot;&gt;-p 9200:9200&lt;/code&gt; parameter. The full command is then &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run -d -p 9200:9200 elasticsearch&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you can reach Elasticsearch from the browser at &lt;a href=&quot;http://localhost:9200&quot; target=&quot;_blank&quot;&gt;http://localhost:9200&lt;/a&gt; (it might take some time until Elasticsearch is booted up).&lt;/p&gt;
+
+&lt;p&gt;In the meantime you can check Docker for its running processes using &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps&lt;/code&gt;.
+This will display a list of running commands similar to this one:
+&lt;script src=&quot;https://gist.github.com/mvieghofer/ae6a3802dcb44d7fedb6c444439ac84e.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;When you want to stop a Docker container again you do this by running &lt;code class=&quot;highlighter-rouge&quot;&gt;docker stop 865d8295fe70&lt;/code&gt;. As you might have noticed the parameter passed to the stop command is the container id displayed in the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps&lt;/code&gt; listing above. If you want to stop all Docker containers at once you can do this using &lt;code class=&quot;highlighter-rouge&quot;&gt;docker stop $(docker ps -q)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The last command I quickly want to discuss here is the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker build&lt;/code&gt; command. With &lt;code class=&quot;highlighter-rouge&quot;&gt;docker build&lt;/code&gt; you can create your own Docker images. In the &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; &amp;lt;ou define all the necessary steps to build your image. The following file shows a very minimalistic (and not so useful) example of such a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt;.
+&lt;script src=&quot;https://gist.github.com/mvieghofer/8a3870252b4b553ed3a1494e8597f8e8.js&quot;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;With &lt;code class=&quot;highlighter-rouge&quot;&gt;docker build -t &amp;lt;username&amp;gt;/&amp;lt;imagename&amp;gt; .&lt;/code&gt; (change &amp;lt;username&amp;gt; to your username and the &amp;lt;imagename&amp;gt; to the name of the image) you can build the Docker image.&lt;/p&gt;
+
+&lt;h2 id=&quot;advanced-docker-tools&quot;&gt;Advanced Docker tools&lt;/h2&gt;
+&lt;p&gt;When you switch to Docker for managing your application you will have to create a few Docker images, at least one for your application and one for your datastore. You can run each Docker image individually or you can use &lt;a href=&quot;https://docs.docker.com/compose/overview/&quot; target=&quot;_blank&quot;&gt;Docker Compose&lt;/a&gt;, which is a Docker tool for multi container applications.&lt;/p&gt;
+
+&lt;p&gt;You can create a Compose file to configure how your application starts. Each container still has a &lt;code class=&quot;highlighter-rouge&quot;&gt;Dockerfile&lt;/code&gt; which configures the Docker image itself but additionally you create a &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; configuration file where you define how the individual Docker images are started. Lastly you can run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose up&lt;/code&gt; to tell Docker Compose to run your entire app.&lt;/p&gt;
+
+&lt;p&gt;Another useful tool is &lt;a href=&quot;https://docs.docker.com/machine/overview/&quot; target=&quot;_blank&quot;&gt;Docker Machine&lt;/a&gt;. With Docker machine you can manage remote machines easily. The following video gives you a great overview of how it works and what you can do with it.&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/yUDEGWCp9qU&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The last Docker tool I want to present here is &lt;a href=&quot;https://docs.docker.com/swarm/overview/&quot; target=&quot;_blank&quot;&gt;Docker Swarm&lt;/a&gt;. It is the native clustering tool for Docker and works tightly with Docker Machine. With the &lt;code class=&quot;highlighter-rouge&quot;&gt;swarm&lt;/code&gt; image you can launch Docker Swarm on the machines in your cluster. There you have a master node, called the Swarm manager, and client nodes, the so called swarm nodes.&lt;/p&gt;
+
+&lt;p&gt;The Swarm manager manages the cluster and is responsible of starting the correct amount of Docker containers on the right nodes in your cluster. Similar to Docker Machine, Docker Swarm serves the Docker API which makes it incredibly easy to run highly distributed Docker applications on your cluster with just a few commands.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-steps&quot;&gt;Next steps&lt;/h2&gt;
+&lt;p&gt;This was a very quick overview of my selection of the most important commands and features of Docker. To get a better overview of all the details you can check out the following resources:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href=&quot;https://docs.docker.com/&quot; target=&quot;_blank&quot;&gt;official docs&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;I found a very good and comprehensive &lt;a href=&quot;https://prakhar.me/docker-curriculum/&quot; target=&quot;_blank&quot;&gt;Docker tutorial&lt;/a&gt;. This was the first tutorial I did.&lt;/li&gt;
+  &lt;li&gt;A curated &lt;a href=&quot;https://github.com/veggiemonk/awesome-docker&quot; target=&quot;_blank&quot;&gt;list of Docker resources&lt;/a&gt; on Github.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Of course you should also use Docker for your next or current project. Only this way you will truly learn how Docker works.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 26 Nov 2016 15:19:42 +0100</pubDate>
+        <link>http://markusvieghofer.at//docker</link>
+        <guid isPermaLink="true">http://markusvieghofer.at//docker</guid>
+        
+        <category>docker</category>
+        
+        
+      </item>
     
       <item>
         <title>How to fix a broken git after upgrading to macOS Sierra</title>
@@ -492,154 +570,6 @@ into your terminal and (re)install the CommandLineTools.&lt;/p&gt;
         <category>maven</category>
         
         <category>versioning</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>How to avoid NullPointerExceptions</title>
-        <description>&lt;p&gt;NullPointerExceptions are a bad thing. It’s probably the worst Exception that can occur in a Java program.&lt;/p&gt;
-
-&lt;p&gt;Your app dies and you, probably always, cannot recover it.&lt;/p&gt;
-
-&lt;p&gt;Even the “inventor” of null, Tony Hoare, claims null references was his &lt;a href=&quot;http://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare&quot;&gt;billion dollar mistake&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you don’t check your variables for null you risk NullPointerExceptions. This bloats up your code and makes it harder to read.&lt;/p&gt;
-
-&lt;p&gt;You have to add lots of &lt;span class=&quot;code&quot;&gt;if (variable != null)&lt;/span&gt; to your code even though you know that at this point the variable can never be null. Just to be save you add it anyway.&lt;/p&gt;
-
-&lt;p&gt;But it doesn’t have to be this way. You can be sure that your code is save and remove all the unnecessary if checks at the same time.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-your-idecan-help-you-to-avoid-nullpointerexceptions&quot;&gt;How your IDE can help you to avoid NullPointerExceptions?&lt;/h2&gt;
-
-&lt;p&gt;Your IDE helps you with a lot of things. Besides the typical stuffs such as autocompletion, syntax highlighting, code navigation it can do something special for you.&lt;/p&gt;
-
-&lt;p&gt;It can help you get rid of NullPointerExceptions and unnecessary null checks.&lt;/p&gt;
-
-&lt;p&gt;All you have to do is to use the @Nonnull and @Nullable annotations and tell your IDE to check for them.&lt;/p&gt;
-
-&lt;p&gt;The problem that occurred with these annotations is that there was no default implementations of them, so a few vendors implemented them on there own. This resulted in the fact, that there is now a &lt;a href=&quot;http://findbugs.sourceforge.net/api/edu/umd/cs/findbugs/annotations/NonNull.html&quot;&gt;@NonNull&lt;/a&gt; and a &lt;a href=&quot;http://findbugs.sourceforge.net/api/edu/umd/cs/findbugs/annotations/Nullable.html&quot;&gt;@Nullable&lt;/a&gt; annotation by &lt;a href=&quot;http://findbugs.sourceforge.net/&quot;&gt;findbugs&lt;/a&gt;, one by IntelliJ (they are called &lt;a href=&quot;https://www.jetbrains.com/idea/help/nullable-and-notnull-annotations.html&quot;&gt;@NotNull and @Nullable&lt;/a&gt;) and &lt;a href=&quot;http://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use&quot;&gt;some more&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;There is also the &lt;a href=&quot;http://types.cs.washington.edu/checker-framework/&quot;&gt;Checker framework&lt;/a&gt; that provides these annotations. This framework was also suggested on the &lt;a href=&quot;https://blogs.oracle.com/java-platform-group/entry/java_8_s_new_type&quot;&gt;oracle blog&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;You should decide which of these annotations you want to use and add them to your code.&lt;/p&gt;
-
-&lt;h2 id=&quot;which-annotation-should-you-use&quot;&gt;Which annotation should you use?&lt;/h2&gt;
-
-&lt;p&gt;Since most IDEs can work with different annotations it doesn’t really matter which annotation you use.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/nullable/nullable-setup.png&quot; alt=&quot;Configure the annotations to use in IntelliJ&quot; title=&quot;Configure the annotations to use in IntelliJ&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You have to make sure that your IDE supports the annotation you want to use. Of course, you should also only use the annotations of one vendor to keep your code clean.&lt;/p&gt;
-
-&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
-
-&lt;p&gt;At first I had to add a dependency to the annotations. I chose to use the findbugs annotations.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-groovy&quot; data-lang=&quot;groovy&quot;&gt;&lt;span class=&quot;n&quot;&gt;dependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compile&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'com.google.code.findbugs:annotations:3.0.1'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;After that I created an Address class that holds a very simplified version of an address object of a person.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;devcouch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;street&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;street&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;street&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;street&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Address{&quot;&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;street='&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;street&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'''&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;, city='&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'''&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then I create a Person class. This class hold the first and the last name of a person and his or her address. However the address is optional and can be null.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;devcouch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.annotation.Nonnull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.annotation.Nullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Nonnull&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;firstName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lastName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Nullable&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getAddressString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Last but not least I create a Main class which used these both classes.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;devcouch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Main&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Markus&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Vieghofer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAddressString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAddressString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-        &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;street&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;city&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Markus&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Vieghofer&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAddressString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;     
-            &lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAddressString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Since I added the &lt;span class=&quot;code&quot;&gt;@Nonnull&lt;/span&gt; annotation to the &lt;span class=&quot;code&quot;&gt;Person#getFullName()&lt;/span&gt; I got a warning from my IDE.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/nullable/warning.png&quot; alt=&quot;Warning because of unnecessary null check&quot; title=&quot;Warning because of unnecessary null check&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The &lt;span class=&quot;code&quot;&gt;@Nullable&lt;/span&gt; annotation gets displayed when you show the javadoc of the method.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/nullable/javadoc.png&quot; alt=&quot;@Nullable appears in the javadoc&quot; title=&quot;@Nullable appears in the javadoc&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also check out the code at &lt;a href=&quot;https://github.com/DevCouch/Nullable&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Using these techniques will help you slim down your code and make it better documented and more secure at the same time.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 13 Dec 2015 20:22:19 +0100</pubDate>
-        <link>http://markusvieghofer.at//how-to-avoid-nullpointerexceptions</link>
-        <guid isPermaLink="true">http://markusvieghofer.at//how-to-avoid-nullpointerexceptions</guid>
-        
-        <category>design-pattern</category>
-        
-        <category>java</category>
-        
-        <category>null</category>
         
         
       </item>
