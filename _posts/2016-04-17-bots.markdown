@@ -1,0 +1,30 @@
+---
+layout: post
+title: Bots are the new thing!
+date: '2016-04-17 12:07:55'
+disqus: true
+tags: [facebook, slack, telegram, messenger, bots]
+meta_description: "Apps are out and bots are in. Every of the major messengers support them and there is already a great number of little software helpers running in those messengers."
+---
+
+Remember some time ago, when everybody talked about apps? Now nobody does that anymore. Bots are the new thing.
+
+In the ancient times of 2015 the operating system of your smartphone was the platform you could install apps on. This way you could customize your phone in a way it fitted best for you. There were a lot of apps out there and you probably installed a lot of them on your phone (at least I did this).
+
+However, now, in 2016, there is a new thing around, called bots. It seems that now every messenger introduces their own platform for bots. [Slack](https://slack.com/) provides the ability to create bots for some time now, [Telegram](https://telegram.org/blog/bots-2-0) just introduced the second version of their bot platform and Facebook just [announced](http://www.theverge.com/2016/4/12/11395806/facebook-messenger-bot-platform-announced-f8-conference/in/11179381) on its yearly developer conference F8 that it would provide a [platform for bots](https://developers.facebook.com/blog/post/2016/04/12/bots-for-messenger/) for its messenger, too. Especially since Facebook introduced their bot platform we can more or less say, that the era of bots officially started.
+
+But what are bots exactly?
+
+Some messengers, [Slack](https://slack.com/) for example, has bots some time now. These little programs can help you a lot during your work day. They can tell you if there were activity on your ticket, or if the jenkins build you just started passed. They can also remind you everyday to do your daily standup.
+
+As for apps, the possibility are endless. Such a bot can do nearly everything for you, as the ad by the Kik messenger implies.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5yr1r1YlGVo" frameborder="0" allowfullscreen></iframe>
+
+The reason I like (especially slack) bots is that they can really help you get your work done faster. Most of the time you have your messenger open all day but don't want to check your Jenkins, ticketing system (e.g. JIRA), etc. every few minutes. With bots you can reduce the number of times you have to check something since the bots can tell you when you have to take action on something.
+
+Also the slack remind bot helps me a lot. Often times I just want to get reminded about something simple, such as "check if process X still runs". I could do this by using tools like Evernote or Wunderlist but the main drawback here is that I only get reminded on my laptop, if I've opened the app before.
+
+Since Slack is one of the few apps that automatically started whenever I start my computer I can be absolutely sure, that I always will be notified, when I'm in front of my computer. This is especially important if I get reminded about something the first thing in the morning.
+
+The drawbacks about these bots is that, each bot may interrupt you during your work (depending on your notification settings). If too many bots are installed, the added noise could cancel out the benefits such bots may provide.

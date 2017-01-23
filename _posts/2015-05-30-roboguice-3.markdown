@@ -1,0 +1,63 @@
+---
+layout: post
+title: Roboguice 3
+date: '2015-05-30 10:45:11'
+disqus: true
+tags:
+- android
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
+---
+
+
+Last year I’ve written [a post](/roboguice-makes-android-development-more-awesome/) about how [RoboGuice](https://github.com/roboguice/roboguice) helps you to make Android programming a lot more readable. Shortly after I’ve published my article a new version of RoboGuice, version 3, was released.
+
+Today I want to review the newest version and point out some very cool features.
+
+
+# Whats new in RoboGuice 3
+
+Previously RoboGuice was a little slow and memory hungry. Especially the startup took some time. The reason for this is that it has to scan all classes to find all the injection points.
+
+This release contains mostly performance optimizations so that RoboGuice gets a lot faster (35% – 70%) and is also less memory hunger. This great increase in runtime performance was accomplished by using the annotation processer RoboBlender.
+
+This annotation processor basically builds a database of annotations which are then used by RoboGuice to quickly inject all needed objects. There is no need of scanning all classes any more.
+
+RoboBlender is purely optional, though. This means if you don’t want to use it, you don’t have to. However you doesn’t want to boost the performance of the app?
+
+Besides the performance optimizations also some other features were implemented. The complete changelog can be found [here](https://github.com/roboguice/roboguice/issues?q=milestone%3A3.0+is%3Aclosed).
+
+
+# Installation
+
+I assume that you use gradle as build automation tool. If so, including RoboGuice to your project is very simple.
+
+All you need to do is to add these two lines to your build.gradle file
+
+{% highlight groovy %}
+dependencies {
+    compile 'org.roboguice:roboguice:3.+'
+    provided 'org.roboguice:roboblender:3.+'
+}
+{% endhighlight %}
+
+Of course you don’t have to use gradle. You can also include the library via [Maven](https://github.com/roboguice/roboguice/wiki/InstallationMaven) or [manually](https://github.com/roboguice/roboguice/wiki/InstallationNonMaven).
+
+As I said before RoboBlender is optional. You don’t have to include it to your app. However, if you don’t want to use RoboBlender you have to disable it. This can either be be done by using an environment variable `roboguice.useAnnotationDatabases=false` or doing it programmatically (this has to be done before creating the first injector) `RoboGuice.setUseAnnotationDatabases(false)`.
+
+# Example
+
+After you configured everything you can start using RoboGuice in your app. The following example shows the most basic setup for an activity.
+
+{% highlight java %}
+@ContentView(R.layout.activity_main)
+public class MainActivity extends RoboActivity {
+    @InjectView(R.id.text_view)
+    private TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        textView.setText("Hello World!");
+    }
+}
+{% endhighlight %}

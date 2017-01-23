@@ -1,0 +1,70 @@
+---
+layout: post
+title: 4 reasons why you should always code in english
+date: '2015-10-18 19:14:27'
+disqus: true
+tags:
+- development
+- english
+meta_description: "My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff."
+---
+
+
+I recently discovered some github projects that looked really cool. The problem with these projects is that everything in these projects was written in Chinese.
+
+Although my chrome tried to translate the text I quickly lost interest in these projects.
+
+One of the main ideas of the open source projects is that they are free to use for everybody. There should be no limitations for anyone.
+
+However, these github projects prove that this is not 100% true. When something isn’t documented and developed in a common language everybody speaks the number of possible users shrink enormously.
+
+You should make sure that all your [open source] projects are documented and developed in a common language a lot, if not all, developers speak. What I mean by that is that all variable, method, class names and all comments are written in that language.
+
+English is more or less the official language of the internet. For us coder this is especially true. Most of the biggest software projects are developed and documented in english.
+
+If your mother language is not english and you normally write your comments in your native language you should definitely read the next paragraphs.
+
+
+# Who will maintain your code?
+
+If you are a professional software developer it is almost certain that some of your colleagues will have to read, use or fix your code.
+
+It might even be possible that somebody who doesn’t work at your company yet will have to use your code. Even years after you wrote it.
+
+If your colleagues don’t speak your mother language as a first language it will be harder for them to understand your code.
+
+As you may know code that is hard to read will often be ignored which leads to duplicate code and duplicate code is evil!
+
+
+# Read the docs!
+
+A huge part of (open source) libraries are developed and documented in english.
+
+This means that every time you have to read the docs of a library you are using you have to switch between your native language you program in and english (the language the library is documented in). This will slow you down and will be exhausting for you.
+
+On the other hand if you develop a library, even if you don’t plan to put it open source, you should develop and document it in english. You never know who uses it.
+
+Someday you might even want to share your library as an open source library. Then it is pretty handy if you’ve developed and documented everything in english.
+
+
+# International Teams
+
+More and more companies have international teams. Also more and more companies decide to have distributed teams.
+
+If you work in such an environment there have to be one common language. This language will be english most of the time.
+
+
+# Stackoverflow
+
+As developers we know that at some point we will have a question we cannot answer yourself.
+
+If you don’t write your application in english it will be harder for you to ask questions online. When you want to ask a question on [stackoverflow.com](http://www.stackoverflow.com) for example, you have to translate everything into english before you can post it if you want everybody to understand your question.
+
+I think this is the biggest argument why you should develop your application in english. To throw away your chance of asking a global community of developers who want to answer your question just because you don’t want to write your comments/variables/etc. in english will not help you to create the best work your can.
+
+Another reason is that most tutorials are written in english, too. Typically we just copy and paste the code in a tutorial. If you don’t develop everything in english you would have to translate all variables, etc.
+
+
+# Bonus: It just doesn’t look right
+
+Although this isn’t really a reason, I think that code just have to be in english. Everything else just looks odd.
