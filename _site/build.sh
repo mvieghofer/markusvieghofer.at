@@ -9,5 +9,5 @@ rm -r _*
 rm about.md
 git add .
 git commit -m "latest version"
-git push origin gh-pages
+git push origin gh-pages --force
 git checkout master

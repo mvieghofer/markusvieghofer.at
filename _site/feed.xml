@@ -5,9 +5,28 @@
     <description>Software made in Österreich</description>
     <link>http://markusvieghofer.at//</link>
     <atom:link href="http://markusvieghofer.at//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 29 Nov 2016 21:17:46 +0100</pubDate>
-    <lastBuildDate>Tue, 29 Nov 2016 21:17:46 +0100</lastBuildDate>
+    <pubDate>Mon, 23 Jan 2017 21:04:34 +0100</pubDate>
+    <lastBuildDate>Mon, 23 Jan 2017 21:04:34 +0100</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Java Beginner Tutorial</title>
+        <description>&lt;p&gt;Some time ago two of my nephews visited me to learn programming. Since Java is &lt;a href=&quot;http://www.tiobe.com/tiobe-index/&quot;&gt;the most popular programming language&lt;/a&gt; and you can use it for a great varity of tasks — the fact that its my favorite language didn’t matter at all ;) — I chose to teach them Java.&lt;/p&gt;
+
+&lt;p&gt;To be prepared and to have some kind of common theme I can rely on I started to write down what I thought is the most important basic information you need to know about Java.&lt;/p&gt;
+
+&lt;p&gt;Now I’ve summarized all the things I think are the most important things of the basics of Java into a &lt;a href=&quot;https://github.com/mvieghofer/java-beginner-tutorial&quot;&gt;Github repo&lt;/a&gt;. If you want to learn Java you are very welcome to check out this repository, read through it and do all the small programming challanges with the tutorial. If you want to contribute to something that helps others learn Java please check it out, too, and help me to improve it!&lt;/p&gt;
+</description>
+        <pubDate>Mon, 23 Jan 2017 15:19:42 +0100</pubDate>
+        <link>http://markusvieghofer.at//java-beginner-tutorial</link>
+        <guid isPermaLink="true">http://markusvieghofer.at//java-beginner-tutorial</guid>
+        
+        <category>java</category>
+        
+        <category>tutorial</category>
+        
+        
+      </item>
     
       <item>
         <title>Docker Bootcamp</title>
@@ -529,47 +548,6 @@ into your terminal and (re)install the CommandLineTools.&lt;/p&gt;
         <pubDate>Sun, 10 Jan 2016 17:05:01 +0100</pubDate>
         <link>http://markusvieghofer.at//ghost-post</link>
         <guid isPermaLink="true">http://markusvieghofer.at//ghost-post</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Why you should use an repository manager</title>
-        <description>&lt;p&gt;When you develop larger applications the time will come when you experience a dependency hell if you don’t handle your dependencies properly.&lt;/p&gt;
-
-&lt;p&gt;A scenario I experienced multiple times is that I checked out a new project from the source code repository and wanted to compile it. However when I started the compilation process my build tool told me that I miss some dependency to another of my projects. After I checked out this project and installed it into my local Maven repository I could compile the first project.&lt;/p&gt;
-
-&lt;p&gt;Some times this process went on for a while until I had installed all projects into my local Maven repository.&lt;/p&gt;
-
-&lt;p&gt;The solution that would help to avoid this problem is to install some kind of global repository which hosts all versions of your internally developed projects. During the development process everyone who needs a specific version of any project can download it from there and use it.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-can-a-repository-manager-help-you-to-accomplish-this&quot;&gt;How can a repository manager help you to accomplish this?&lt;/h2&gt;
-
-&lt;p&gt;A repository manager is a tool that hosts all versions of your internally developed projects and provides a central place to download it from. It also may act as a proxy to publically available repositories (such as the the central Maven repository).&lt;/p&gt;
-
-&lt;p&gt;It holds all the versions of your internal projects you deploy to it. Later you can download the needed dependencies from there. If you configure your build tools correctly all this is done automatically.&lt;/p&gt;
-
-&lt;h2 id=&quot;nexus-vs-artifactory&quot;&gt;Nexus vs. Artifactory&lt;/h2&gt;
-
-&lt;p&gt;There are two big players that provide repo managers: &lt;a href=&quot;http://www.sonatype.org/nexus/&quot;&gt;Nexus&lt;/a&gt; and &lt;a href=&quot;https://www.jfrog.com/artifactory/&quot;&gt;Artifactory&lt;/a&gt;. Both tools are open source and can be used for free. This free version only provides the basic features, though. Since both tools come from the Java world, you can use the free version perfectly as a repository manager for your Java projects.&lt;/p&gt;
-
-&lt;p&gt;Besides the Java artifact management a of of other types of repositories can be managed, such as Docker, RPM or Bower.&lt;/p&gt;
-
-&lt;p&gt;Since both tools provide a wide array of features it can be pretty hard to decide what tool to use. There is a &lt;a href=&quot;https://binary-repositories-comparison.github.io/&quot;&gt;comparison martix&lt;/a&gt; online that can be used for comparison. However if you just need a repository manager for managing your java artifacts both tools can be used.&lt;/p&gt;
-
-&lt;p&gt;In such a case I would take artifactory. The reason is that it has a nicer UI and also its documentation is more straight forward. Additionally artifactory helps you to set up your build tools such as Maven or Gradle.&lt;/p&gt;
-</description>
-        <pubDate>Wed, 30 Dec 2015 19:21:06 +0100</pubDate>
-        <link>http://markusvieghofer.at//repository-manager</link>
-        <guid isPermaLink="true">http://markusvieghofer.at//repository-manager</guid>
-        
-        <category>artifactory</category>
-        
-        <category>gradle</category>
-        
-        <category>maven</category>
-        
-        <category>versioning</category>
         
         
       </item>
