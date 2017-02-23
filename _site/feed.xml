@@ -5,9 +5,58 @@
     <description>Software made in Österreich</description>
     <link>http://markusvieghofer.at//</link>
     <atom:link href="http://markusvieghofer.at//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 23 Jan 2017 21:04:34 +0100</pubDate>
-    <lastBuildDate>Mon, 23 Jan 2017 21:04:34 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Feb 2017 20:58:23 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Feb 2017 20:58:23 +0100</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
+    
+      <item>
+        <title>Gradle Test Logs</title>
+        <description>&lt;p&gt;Testing your software is important and should be part of every development process. Without tests you cannot confidently refactor important and/or big parts of your application which will lead to legacy code that gets harder and harder to work with.&lt;/p&gt;
+
+&lt;p&gt;The problem with testing is that it is hard. Writing good tests and software that can easily be tested is not a trivial task and even if we do our best to write good tests they sometimes fail for no obvious reason.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/gradle-test-logs/tests.jpg&quot;&gt;&lt;img src=&quot;/assets/images/gradle-test-logs/tests-small.jpg&quot; alt=&quot;Testing is hard&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the worst case scenario the test suite works fine on your local machine but doesn’t on a colleagues laptop or on your build server.&lt;/p&gt;
+
+&lt;p&gt;Most of the times I’ve seen such a behavior some tests caused some side effects that let other tests fail.&lt;/p&gt;
+
+&lt;p&gt;When your tests are written in Java using JUnit the order in which your tests are executed is random. It can neither be guaranteed that they are executed in a certain order nor that this order is the same every time your test suite is executed.&lt;/p&gt;
+
+&lt;p&gt;When your tests work on your local machine but fail on the build server it’s often hard to tell why they fail.&lt;/p&gt;
+
+&lt;p&gt;One reason might be that one of your tests produces side effects that let another test fail. In order to find such a test you need to know in which order your tests are executed.&lt;/p&gt;
+
+&lt;p&gt;If you build your project using Gradle the order in which your tests are executed is not logged by default. To get this you need to add some code to your Gradle file.&lt;/p&gt;
+
+&lt;p&gt;Luckily the test task comes with &lt;a href=&quot;https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/TestListener.html&quot;&gt;some additional methods&lt;/a&gt; to handle certain events. So basically everything is there you just have to activate it.&lt;/p&gt;
+
+&lt;p&gt;For example you can react to the &lt;code class=&quot;highlighter-rouge&quot;&gt;beforeTest&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;afterTest&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;beforeSuite&lt;/code&gt; or the &lt;code class=&quot;highlighter-rouge&quot;&gt;afterSuite&lt;/code&gt; event. As the names imply these events are triggered either before or after a certain test or test suite is executed.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/images/gradle-test-logs/logging.jpg&quot;&gt;&lt;img src=&quot;/assets/images/gradle-test-logs/logging-small.jpg&quot; alt=&quot;Testing is hard&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Both after events provide a descriptor of the test or test suite as well as its result. Since I also wanted to log the result of each test I chose to use the &lt;code class=&quot;highlighter-rouge&quot;&gt;afterTest&lt;/code&gt; event. If you would use the &lt;code class=&quot;highlighter-rouge&quot;&gt;before&lt;/code&gt; events no results but only the descriptor would be available for you.&lt;/p&gt;
+
+&lt;p&gt;Using the following few lines you can log the order of your tests.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/mvieghofer/c42c81746467a59a9763e559034ead88.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;I chose to remove the package of the fully qualified class name we get from &lt;code class=&quot;highlighter-rouge&quot;&gt;getClassName()&lt;/code&gt; since I think it is better readable. After I’ve prepared the class name I just log all information I want using the &lt;code class=&quot;highlighter-rouge&quot;&gt;logger.lifecycle&lt;/code&gt; method that comes with Gradle.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 23 Feb 2017 15:19:42 +0100</pubDate>
+        <link>http://markusvieghofer.at//gradle-test-logs</link>
+        <guid isPermaLink="true">http://markusvieghofer.at//gradle-test-logs</guid>
+        
+        <category>gradle</category>
+        
+        <category>tutorial</category>
+        
+        <category>java</category>
+        
+        <category>junit</category>
+        
+        
+      </item>
     
       <item>
         <title>Java Beginner Tutorial</title>
@@ -513,41 +562,6 @@ into your terminal and (re)install the CommandLineTools.&lt;/p&gt;
         <category>ruby</category>
         
         <category>javascript</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>New Year New Blog</title>
-        <description>&lt;p&gt;Trying something new is important. Last year I learned two new programming languages: &lt;a href=&quot;/new-year-new-language-python&quot; title=&quot;Python&quot;&gt;Python&lt;/a&gt; and &lt;a href=&quot;/a-new-programming-language-again&quot; title=&quot;PHP&quot;&gt;PHP&lt;/a&gt;. This year the first thing I’m going the check out wont be a new programming language but a new blogging platform.&lt;/p&gt;
-
-&lt;p&gt;Since this year my blog runs on the &lt;a href=&quot;https://ghost.org/&quot; title=&quot;Ghost&quot;&gt;ghost&lt;/a&gt; platform. I’ve already tried ghost &lt;a href=&quot;/ghost-just-a-blogging-platform/&quot; title=&quot;Ghost - Just a blogging platform&quot;&gt;a while ago&lt;/a&gt; and I was impressed. However at this time my blog ran on Wordpress and I didn’t want to switch, partly because at this time ghost was still in a very early phase.&lt;/p&gt;
-
-&lt;p&gt;In the beginning of 2016 my Wordpress hosting contract ran out and I decided to try something new, just for the sake of it. Since I always like the simplicity of Ghost it was obvious to give it a try.&lt;/p&gt;
-
-&lt;p&gt;Some of the reasons why I switched were that Wordpress becomes more and more difficult to manage, I experienced it as slow and a bit too much for my needs.&lt;/p&gt;
-
-&lt;p&gt;Because Wordpress is way more that just a blogging platform it felt a bit too complex for your “just” a blog. Also the admin site was really slow compared to ghost. I didn’t look for any benchmarks but the fact that Wordpress is a PHP app and Ghost is a single page Javascript app should be reason enough to make Ghost faster than Wordpress.&lt;/p&gt;
-
-&lt;p&gt;I also really like the split editor of Ghost. You can write your post using Markdown for formatting and you immediately see how it will look like. This makes writing really easy and your mouse becomes almost completely unnecessary while your write. As a developer, who always tries to make the mouse as unnecessary as possible (since it takes a lot of time to use it), this is a huge plus point.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/ghost-2/ghost.png&quot; alt=&quot;&quot; title=&quot;Ghost Editor&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Of course, Wordpress isn’t that bad and Ghost the ultimate tool for solving all blogging problems. There are some things that ghost doesn’t ship with. For example you have to setup an email service you want to use in your app; I used &lt;a href=&quot;https://www.mailgun.com/sending-email&quot; title=&quot;Mailgun&quot;&gt;mailgun&lt;/a&gt; for that. You also have to setup a commenting system for your blog. As you can see below I use &lt;a href=&quot;https://disqus.com/&quot; title=&quot;Disqus&quot;&gt;disqus&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you are a developer both these things are a no brainer and there are good tutorials for both &lt;a href=&quot;http://support.ghost.org/mail/&quot; title=&quot;Use Mailgun for you Ghost blog&quot;&gt;these&lt;/a&gt; &lt;a href=&quot;http://support.ghost.org/add-disqus-to-my-ghost-blog/&quot; title=&quot;Use disqus for your Ghost blog&quot;&gt;tasks&lt;/a&gt;. However if you are a blogger without a technical background these tasks can be hard and will probably hinder you to use Ghost.&lt;/p&gt;
-
-&lt;p&gt;Another thing that I’m still missing is a dashboard for my blog. I have to gather all the data from different places, such as my commenting system, Google Analytics, etc. Although you maybe don’t need a dashboard for a blog it is still good to have all necessary information on one page.&lt;/p&gt;
-
-&lt;p&gt;As said before Wordpress is definitely not dead and I also don’t think Ghost will replace Wordpress. The redesigned &lt;a href=&quot;http://wordpress.com&quot; title=&quot;Wordpress&quot;&gt;wordpress.com&lt;/a&gt; site is definitely a step in the right direction. It became a lot faster since it is now a single page Javascript app, too. Additionally you can also manage multiple sites at once (which was possible before the redesign, too) which can be very helpful if you have to manage multiple Wordpress instances.&lt;/p&gt;
-
-&lt;p&gt;However there are still some things that aren’t perfect such as the automatic reformat of your text if you switch from the HTML view to the text view; this can be really frustrating, especially if you have code listings on your site.&lt;/p&gt;
-
-&lt;p&gt;For now I will enjoy the simplicity of Ghost.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 10 Jan 2016 17:05:01 +0100</pubDate>
-        <link>http://markusvieghofer.at//ghost-post</link>
-        <guid isPermaLink="true">http://markusvieghofer.at//ghost-post</guid>
         
         
       </item>
