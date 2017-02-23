@@ -2,7 +2,7 @@
 layout: post
 title: "Gradle Test Logs"
 date: 2017-02-23 14:19:42
-meta_description: "TODO"
+meta_description: "Log executed tests can be handy to find bugs in your tests. When you use gradle to build your project you need to add some code to accomplish this."
 tags: [gradle, tutorial, java, junit]
 ---
 Testing your software is important and should be part of every development process. Without tests you cannot confidently refactor important and/or big parts of your application which will lead to legacy code that gets harder and harder to work with.
