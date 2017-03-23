@@ -5,8 +5,8 @@
     <description>Software made in Österreich</description>
     <link>http://markusvieghofer.at//</link>
     <atom:link href="http://markusvieghofer.at//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 20:58:23 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 20:58:23 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Mar 2017 06:54:14 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Mar 2017 06:54:14 +0100</lastBuildDate>
     <generator>Jekyll v3.2.1</generator>
     
       <item>
@@ -137,12 +137,10 @@ This will display a list of running commands similar to this one:
 &lt;p&gt;The Swarm manager manages the cluster and is responsible of starting the correct amount of Docker containers on the right nodes in your cluster. Similar to Docker Machine, Docker Swarm serves the Docker API which makes it incredibly easy to run highly distributed Docker applications on your cluster with just a few commands.&lt;/p&gt;
 
 &lt;h2 id=&quot;next-steps&quot;&gt;Next steps&lt;/h2&gt;
-&lt;p&gt;This was a very quick overview of my selection of the most important commands and features of Docker. To get a better overview of all the details you can check out the following resources:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://docs.docker.com/&quot; target=&quot;_blank&quot;&gt;official docs&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;I found a very good and comprehensive &lt;a href=&quot;https://prakhar.me/docker-curriculum/&quot; target=&quot;_blank&quot;&gt;Docker tutorial&lt;/a&gt;. This was the first tutorial I did.&lt;/li&gt;
-  &lt;li&gt;A curated &lt;a href=&quot;https://github.com/veggiemonk/awesome-docker&quot; target=&quot;_blank&quot;&gt;list of Docker resources&lt;/a&gt; on Github.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;This was a very quick overview of my selection of the most important commands and features of Docker. To get a better overview of all the details you can check out the following resources:
+* The &lt;a href=&quot;https://docs.docker.com/&quot; target=&quot;_blank&quot;&gt;official docs&lt;/a&gt;.
+* I found a very good and comprehensive &lt;a href=&quot;https://prakhar.me/docker-curriculum/&quot; target=&quot;_blank&quot;&gt;Docker tutorial&lt;/a&gt;. This was the first tutorial I did.
+* A curated &lt;a href=&quot;https://github.com/veggiemonk/awesome-docker&quot; target=&quot;_blank&quot;&gt;list of Docker resources&lt;/a&gt; on Github.&lt;/p&gt;
 
 &lt;p&gt;Of course you should also use Docker for your next or current project. Only this way you will truly learn how Docker works.&lt;/p&gt;
 </description>

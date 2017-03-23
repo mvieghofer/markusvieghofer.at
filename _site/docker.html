@@ -11,14 +11,13 @@
     <meta name="MobileOptimized" content="320" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
     <!-- Customisation  -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
     
 
     <!-- favicons -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link id="atf" data-btf="/assets/css/screen.css;/assets/css/main.css;//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 
 </head>
 <body class="home-template">
@@ -121,12 +120,10 @@ This will display a list of running commands similar to this one:
 <p>The Swarm manager manages the cluster and is responsible of starting the correct amount of Docker containers on the right nodes in your cluster. Similar to Docker Machine, Docker Swarm serves the Docker API which makes it incredibly easy to run highly distributed Docker applications on your cluster with just a few commands.</p>
 
 <h2 id="next-steps">Next steps</h2>
-<p>This was a very quick overview of my selection of the most important commands and features of Docker. To get a better overview of all the details you can check out the following resources:</p>
-<ul>
-  <li>The <a href="https://docs.docker.com/" target="_blank">official docs</a>.</li>
-  <li>I found a very good and comprehensive <a href="https://prakhar.me/docker-curriculum/" target="_blank">Docker tutorial</a>. This was the first tutorial I did.</li>
-  <li>A curated <a href="https://github.com/veggiemonk/awesome-docker" target="_blank">list of Docker resources</a> on Github.</li>
-</ul>
+<p>This was a very quick overview of my selection of the most important commands and features of Docker. To get a better overview of all the details you can check out the following resources:
+* The <a href="https://docs.docker.com/" target="_blank">official docs</a>.
+* I found a very good and comprehensive <a href="https://prakhar.me/docker-curriculum/" target="_blank">Docker tutorial</a>. This was the first tutorial I did.
+* A curated <a href="https://github.com/veggiemonk/awesome-docker" target="_blank">list of Docker resources</a> on Github.</p>
 
 <p>Of course you should also use Docker for your next or current project. Only this way you will truly learn how Docker works.</p>
 
@@ -138,7 +135,7 @@ This will display a list of running commands similar to this one:
             <!-- If we want to display author's name and bio -->
             
                 <figure class="author-image">
-                    <a class="img" href="/" style="background-image: url(/assets/images/profile.png)">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
                     <span class="hidden">Markus Vieghofer's Picture</span></a>
                 </figure>
                 <div class="author-image-line"></div>
@@ -188,6 +185,7 @@ This will display a list of running commands similar to this one:
       </section>
     </footer>
 
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
     <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
     <script type="text/javascript" src="/assets/js/index.js"></script>
@@ -205,6 +203,23 @@ This will display a list of running commands similar to this one:
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
 
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
     </script>
 </body>
 </html>
