@@ -5,7 +5,7 @@
  */
 (function(){
 	
-	var atf, buff, i = 0, max, links = [], totalLoaded = 0;
+	var atf, buff, max, totalLoaded = 0;
 	
 	atf = document.getElementById("atf");
 	if (! atf ) {
@@ -15,26 +15,22 @@
 	buff = atf.getAttribute("data-btf");
 	buff = buff.split(";");
 	
-	if ( buff.length < 2 ) {
-		buff = buff;
-	}
-	
 	max = buff.length;
 	
-	for ( i; i<max; i++ ) {
+	for ( var i = 0; i < max; i++ ) {
 		if ( buff[i] !== "" ) {
 			
-			links[i] = document.createElement("link");
-			links[i].rel = "stylesheet";
-			links[i].href = buff[i];
-			links[i].onload = function(){
+			var link = document.createElement("link");
+			link.rel = "stylesheet";
+			link.href = buff[i];
+			link.onload = function(){
 				totalLoaded++;
-				if ( totalLoaded >= (max -1) ) {
+				if ( totalLoaded >= max ) {
 					atf.parentElement.removeChild(atf);
 				}
 			};
 			
-			document.head.appendChild(links[i]);
+			document.head.appendChild(link);
 			
 			
 		}
