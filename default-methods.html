@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Why Java 8 Default Methods are cool</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-11-28">28 Nov 2015</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/interface">#interface</a>
+    
+        <a href="/tag/java">#java</a>
+    
+        <a href="/tag/java-8">#java-8</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-11-28">28 Nov 2015</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Why Java 8 Default Methods are cool</h1> -->
+
+        <section class="post-content">
+            <p>Since <a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">Java 8</a> you can implement default methods to interfaces. This is pretty handy if your default implementation can be implemented in a generic way.</p>
+
+<p>One example are the sort methods that come with the collection interfaces. In previous versions of Java, a lot of util methods were added in util classes. The Collections class provided a lot of useful methods for collections.</p>
+
+<p>With default methods this isn’t necessary anymore. The interface itself can provide the default implementations which can then be overriden or extended in the classes.</p>
+
+<h2 id="multiple-inheritance">Multiple Inheritance</h2>
+
+<p>This can lead to the problem of multiple inheritance. When one of your classes implements at least two interfaces with the same default method your compiler will exit with an error. You will have to manually solve this conflict.</p>
+
+<p>This could be done this way:</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">A</span> <span class="o">{</span>
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">B</span> <span class="o">{</span>
+    <span class="k">default</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Another implementation of foo, "</span> <span class="o">+</span> <span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="kd">implements</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">bar</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">A</span><span class="o">.</span><span class="na">super</span><span class="o">.</span><span class="na">bar</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+<h2 id="will-default-methods-be-the-end-of-utility-classes">Will default methods be the end of utility classes?</h2>
+
+<p>With default methods utility classes were made obsolete. Everything you can do with utility classes you can do with default method implementations in interface, too.</p>
+
+<p>The pros about default methods are that you can add them directly to your class. If you implement some utility method that will be used for a broad range of classes maybe default methods are the better way.</p>
+
+<p>However default methods make multiple inheritance a potential problem again. It might be hard to resolve such a conflict.</p>
+
+<p>Since the compiler will tell you about the error as soon as the code is compiled you will realize such errors very soon. This will give you the chance to fix the errors as soon as possible.</p>
+
+<p>Another point against default methods are that you might not want to let your class implement a lot of different interfaces that contain default methods. On the other hand, if you have an interface ‘A’ with a default method implementation you can easily create a util class that implements this methods if you don’t want your class to implement the interface ‘A’.</p>
+
+<p>As always it is a matter of taste and dependent on the actual use case.</p>
+
+<p>A project that contains the default method show cases is also available on <a href="https://github.com/DevCouch/DefaultMethods">GitHub</a>.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Why Java 8 Default Methods are cool&amp;url=http://markusvieghofer.at/default-methods"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/default-methods"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/default-methods"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>

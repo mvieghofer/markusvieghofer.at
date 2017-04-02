@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">How to handle Java exceptions properly</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-11-04">04 Nov 2015</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/excetions">#excetions</a>
+    
+        <a href="/tag/java">#java</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-11-04">04 Nov 2015</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">How to handle Java exceptions properly</h1> -->
+
+        <section class="post-content">
+            <p>One base part of the Java framework are exceptions. A lot of people use them but not everyone who use them also know how to use them properly.</p>
+
+<p>One important thing to know about exceptions is how their hierarchy is built up. The root of all exceptions is the <a href="http://docs.oracle.com/javase/7/docs/api/index.html?java/lang/Throwable.html">Throwable</a> interface.</p>
+
+<p>Below that there are basically three types of exceptions: (1) <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Error.html">Error</a>s, (2) <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html">Exception</a>s and (3) <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html">RuntimeException</a>s.</p>
+
+<p>Errors are thrown when something is wrong with the JVM. Errors should not be wrapped inside a try-catch block because they signal that the application is in a not recoverable condition.</p>
+
+<p>Exceptions, or also called checked exceptions, should be thrown when some expected error happened but the application can be recovered. Examples for checked exceptions are <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html">IOException</a> of <a href="http://docs.oracle.com/javase/7/docs/api/java/sql/SQLException.html">SQLException</a>s. These errors are not caused by the user but because of some other instance that cannot be influenced (such as the network or IO).</p>
+
+<p>Checked exceptions have to be declared in the method signature and have to be explicitly dealt with. This means that when a method you are using throws an IOException you can either catch and deal with it or you add a <span style="font-family: monospace;">throws IOException </span>to your method.</p>
+
+<p>Runtime exceptions are subtypes of exceptions that don’t have to be dealt with immediately. Often these exceptions are thrown when the developer made a mistake. A <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/NullPointerException.html">NullPointerException</a> would be an example of a runtime exception.</p>
+
+<h1 id="when-should-you-use-which-kind-of-exception">When should you use which kind of exception?</h1>
+
+<p>You should never throw Errors (only if you have a very very good reason such as you broke the JVM).</p>
+
+<p>When something happens which is predictable and the application is very likely recoverable you should throw a checked exception. As I said before examples of these are SQLExceptions which are thrown when there is a problem with a database.</p>
+
+<p>Similarly when there is something wrong with your app or framework which can be repaired by the user you should throw a checked exception.</p>
+
+<p>However you should always think twice if you throw a checked exception. If the method you implement throws lot of checked exception will lead the user to just catch an Exception. All the benefits you get from exception will then be lost.</p>
+
+<p>When something goes wrong because your user did something wrong you should throw a RuntimeException. If you throw a RuntimeException yourself, you should always document it.</p>
+
+<h1 id="what-is-the-benefit-of-custom-exceptions">What is the benefit of custom exceptions?</h1>
+
+<p>Also you should consider to create custom exceptions. With custom exceptions you can add some additional information and also don’t provide implementation details to the user.</p>
+
+<p>For example if you implement a file based storage and a database storage your user shouldn’t have to deal with SQLExceptions or IOExceptions. You should wrap these exceptions in your custom StorageException.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=How to handle Java exceptions properly&amp;url=http://markusvieghofer.at/java-exceptions"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/java-exceptions"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/java-exceptions"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>

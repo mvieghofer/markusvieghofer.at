@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Roboguice 3</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-05-30">30 May 2015</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/android">#android</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-05-30">30 May 2015</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Roboguice 3</h1> -->
+
+        <section class="post-content">
+            <p>Last year I’ve written <a href="/roboguice-makes-android-development-more-awesome/">a post</a> about how <a href="https://github.com/roboguice/roboguice">RoboGuice</a> helps you to make Android programming a lot more readable. Shortly after I’ve published my article a new version of RoboGuice, version 3, was released.</p>
+
+<p>Today I want to review the newest version and point out some very cool features.</p>
+
+<h1 id="whats-new-in-roboguice-3">Whats new in RoboGuice 3</h1>
+
+<p>Previously RoboGuice was a little slow and memory hungry. Especially the startup took some time. The reason for this is that it has to scan all classes to find all the injection points.</p>
+
+<p>This release contains mostly performance optimizations so that RoboGuice gets a lot faster (35% – 70%) and is also less memory hunger. This great increase in runtime performance was accomplished by using the annotation processer RoboBlender.</p>
+
+<p>This annotation processor basically builds a database of annotations which are then used by RoboGuice to quickly inject all needed objects. There is no need of scanning all classes any more.</p>
+
+<p>RoboBlender is purely optional, though. This means if you don’t want to use it, you don’t have to. However you doesn’t want to boost the performance of the app?</p>
+
+<p>Besides the performance optimizations also some other features were implemented. The complete changelog can be found <a href="https://github.com/roboguice/roboguice/issues?q=milestone%3A3.0+is%3Aclosed">here</a>.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>I assume that you use gradle as build automation tool. If so, including RoboGuice to your project is very simple.</p>
+
+<p>All you need to do is to add these two lines to your build.gradle file</p>
+
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span> <span class="s1">'org.roboguice:roboguice:3.+'</span>
+    <span class="n">provided</span> <span class="s1">'org.roboguice:roboblender:3.+'</span>
+<span class="o">}</span></code></pre></figure>
+
+<p>Of course you don’t have to use gradle. You can also include the library via <a href="https://github.com/roboguice/roboguice/wiki/InstallationMaven">Maven</a> or <a href="https://github.com/roboguice/roboguice/wiki/InstallationNonMaven">manually</a>.</p>
+
+<p>As I said before RoboBlender is optional. You don’t have to include it to your app. However, if you don’t want to use RoboBlender you have to disable it. This can either be be done by using an environment variable <code class="highlighter-rouge">roboguice.useAnnotationDatabases=false</code> or doing it programmatically (this has to be done before creating the first injector) <code class="highlighter-rouge">RoboGuice.setUseAnnotationDatabases(false)</code>.</p>
+
+<h1 id="example">Example</h1>
+
+<p>After you configured everything you can start using RoboGuice in your app. The following example shows the most basic setup for an activity.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="nd">@ContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">RoboActivity</span> <span class="o">{</span>
+    <span class="nd">@InjectView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">text_view</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="n">TextView</span> <span class="n">textView</span><span class="o">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
+        <span class="n">textView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Roboguice 3&amp;url=http://markusvieghofer.at/roboguice-3"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/roboguice-3"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/roboguice-3"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>

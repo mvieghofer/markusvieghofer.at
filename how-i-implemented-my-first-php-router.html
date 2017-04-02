@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">How I implemented my first PHP Router</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-08-08">08 Aug 2015</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/php">#php</a>
+    
+        <a href="/tag/router">#router</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-08-08">08 Aug 2015</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">How I implemented my first PHP Router</h1> -->
+
+        <section class="post-content">
+            <p>I’ve recently started to learn PHP and created a small example project. The small project soon got bigger and bigger and I added feature after feature.</p>
+
+<p>The first version of the project was really messy. It was coded as you would expect if from a PHP beginner. I soon realized that this is not the way a PHP application works and so I started to split everything up and use MVC to structure the application.</p>
+
+<p>To be as flexible as possible it is a good idea to use a router to execute controller steps according to the requested URL. Therefore I started to implemented my first and very simple router.</p>
+
+<h1 id="simple-router">Simple Router</h1>
+
+<p>First I edited the .htaccess file to rewrite the URL and pass it to my index.php file. If I entered the URL <code class="highlighter-rouge">http://localhost/post/new</code> the URL would have been modified in a way that it looks like this: <code class="highlighter-rouge">http://localhost/index.php?url=post/new</code>. So everything after the <code class="highlighter-rouge">http://localhost/</code> was cut off and set to the url parameter which is then added to the end of the URL.</p>
+
+<p>The .htaccess file I use look like the following:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">Options -MultiViews
+RewriteEngine On
+RewriteBase /public/
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> !-d
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> !-f
+RewriteRule ^<span class="o">(</span>.+<span class="o">)</span><span class="nv">$ </span> index.php?url<span class="o">=</span><span class="nv">$1</span> <span class="o">[</span>QSA,L]</code></pre></figure>
+
+<p>Now the url I request is passed to the index.php and can be processed.</p>
+
+<p>To do this I wrote a little class that accomplishes this. This class originally had two public methods: (1) an <code class="highlighter-rouge">add</code> method and (2) a <code class="highlighter-rouge">run</code> method.</p>
+
+<p>You could add a mapping between an url and a controller method to the router and when you are done you just had to execute the run method to start the controller. Whenever a new url was requested the router was initialized and processed the url parameter in the run method.</p>
+
+<p>The <code class="highlighter-rouge">add</code> method of the router class looks like the following:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">public function add($uri, $function) {
+    $uri = str_replace('/', '\/', $uri);
+    $this-&gt;urlMap[$uri] = $function;
+}</code></pre></figure>
+
+<p>It takes an url parameter and maps it to the function passed. This can be either the name of a controller as well as the method that should be invoked separated by a # or a function.</p>
+
+<p>Example calls for this method could look like this:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$router = new Router();
+$router-&gt;add('/home', 'HomeController#indexAction');
+$router-&gt;add('/about', function() {
+    $controller = new AboutController();
+    $controller-&gt;indexAction();
+});</code></pre></figure>
+
+<p>After you added the url patterns and the corresponding functions to execute the router has to actually map the incoming url to the configured urls. For doing this I’ve implemented a <code class="highlighter-rouge">run</code> method.</p>
+
+<p>The run method iterates over all mapped url and checks them against the incoming url. If a url matches the incoming url either the function that is mapped to the url is executed.</p>
+
+<p>This is either a real function that just has to be called or it is a string representation of the controller and the function of the controller that should be called. In the second case the string is split so that I have the controller step and the function to call in an array.</p>
+
+<p>I can build the path to the controller and include it to my PHP script. Then I can call the method of the controller by using the <code class="highlighter-rouge">call_user_func_array</code> function.</p>
+
+<p>The parameters passed to that function are extracted by the getParamsFromUrl function. This function basically compares the mapped url with the incoming url and cuts off everything from the incoming url that is also defined in the mapped url. For example, when the mapped url is <code class="highlighter-rouge">/post/\d+</code> and the incoming url is <code class="highlighter-rouge">/post/15</code> the extracted parameters are <code class="highlighter-rouge">15</code>.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">public function run() {
+    $url = '/';
+    if (isset($_GET['url'])) {
+        $url .= $_GET['url'];
+    }
+
+    foreach ($this-&gt;urlMap as $key =<span class="ni">&amp;gt;</span> $value) {
+        if (preg_match("/^$key$/", $url)) {
+            $this-&gt;mapUrl($url, $key, $value);
+        }
+    }
+}
+
+protected function getControllerFileName($controllerName) {
+    return APP_PATH . '/controllers/' . $controllerName . '.php';
+}
+
+private function mapUrl($url, $key, $function) {
+    if (is_string($function)) {
+        // extract the params form the url and create an array
+        // from them
+        $params = $this-&gt;getParamsFromUrl($url, $key);
+        $params = $params ? array_values($params) : [];
+
+        // split the controller#function string at the # symbol
+        $function = explode('#', $function);
+
+        // include the controller and create an instance
+        require_once($this-&gt;getControllerFileName($function[0]));
+        $controller = new $function[0];
+
+        // call the function of the controller and pass the params      
+        call_user_func_array([$controller, $function[1]], $params);
+    } else {
+        call_user_func($function);
+    }
+}
+
+private function getParamsFromUrl($url, $regex) {
+    if (isset($url) <span class="err">&amp;&amp;</span> isset($regex)) {
+        $regex = str_replace('\/', '/', $regex);
+        $url = explode('/', filter_var(rtrim($url, '/'), FILTER_SANITIZE_URL));
+        $regex = explode('/', filter_var(rtrim($regex, '/'), FILTER_SANITIZE_URL));
+        if (sizeof($url) != sizeof($regex)) {
+            return [];
+        }
+        foreach ($url as $index =<span class="ni">&amp;gt;</span> $value) {
+            if ($regex[$index] == $value) {
+                unset($url[$index]);
+            }
+        }
+        return $url;
+    }
+}</code></pre></figure>
+
+<p>After implementing this function it has to be called. This is done in the index.php file right after all urls are added to the router.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$router = new Router();
+$router-&gt;add('/home', 'HomeController#indexAction');
+$router-&gt;add('/about', function() {
+    $controller = new AboutController();
+    $controller-&gt;indexAction();
+});
+$router-&gt;run();</code></pre></figure>
+
+<h1 id="advanced-router">Advanced Router</h1>
+
+<p>To be able to do more than just add urls to function mappings I’ve extended the router and added some more functionality. Instead of having just an add method I’ve added a <code class="highlighter-rouge">get</code>, <code class="highlighter-rouge">post</code>, <code class="highlighter-rouge">put</code> and <code class="highlighter-rouge">delete</code> method. Also the <code class="highlighter-rouge">add</code> method got another parameter, an array of methods.</p>
+
+<p>As you already guessed, the <code class="highlighter-rouge">get</code> method executes a function if a certain url is accessed via the HTTP get method. For the <code class="highlighter-rouge">post</code>, <code class="highlighter-rouge">put</code> and <code class="highlighter-rouge">delete</code> method it is similar.</p>
+
+<p>The new <code class="highlighter-rouge">add</code> method does basically the same thing as before, it just stores the urls and functions in a matrix where the second dimension are the HTTP methods.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">public function get($uri, $function) {
+    $this-&gt;add($uri, $function, ['GET']);
+}
+
+public function post($uri, $function) {
+    $this-&gt;add($uri, $function, ['POST']);
+}
+
+public function put($uri, $function) {
+    $this-&gt;add($uri, $function, ['PUT']);
+}
+
+public function delete($uri, $function) {
+    $this-&gt;add($uri, $function, ['DELETE']);
+}
+
+public function add($uri, $function, array $methods) {
+    $uri = str_replace('/', '\/', $uri);
+    if (!isset($this-&gt;urlMap[$uri]) || empty($this-&gt;urlMap[$uri])) {
+        $this-&gt;urlMap[$uri] = [];
+    }
+    foreach($methods as $method) {
+        $this-&gt;urlMap[$uri][$method] = $function;
+    }
+}</code></pre></figure>
+
+<p>After this change also the <code class="highlighter-rouge">run</code> method has to be adapted. The correct method for the current HTTP method has to be used.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">public function run() {
+    $method = $_SERVER['REQUEST_METHOD'];
+    $url = '/';
+    if (isset($_GET['url'])) {
+        $url .= $_GET['url'];
+    }
+    foreach ($this-&gt;urlMap as $key =&gt; $value) {
+        if (preg_match("/^$key$/", $url) <span class="err">&amp;&amp;</span> isset($value) <span class="err">&amp;&amp;</span> isset($value[$method])) {
+            $this-&gt;mapUrl($url, $key, $value[$method]);
+        }
+    }
+}</code></pre></figure>
+
+<p>After these changes were implemented the configuration of the router has to be adapted. All urls that should only be mapped for a certain HTTP method are mapped using the corresponding method. All urls that should be mapped for multiple methods are mapped using the <code class="highlighter-rouge">add</code> method. For this case also the methods have to be passed.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php">$router = new Router();
+$router-&gt;get('/home', 'HomeController#getAction');
+$router-&gt;post('/home', 'HomeController#postAction');
+$router-&gt;add('/about', function() {
+    $controller = new AboutController();
+    $controller-&gt;indexAction();
+}, ['GET', 'POST', 'DELETE', 'PUT']);
+$router-&gt;run();</code></pre></figure>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=How I implemented my first PHP Router&amp;url=http://markusvieghofer.at/how-i-implemented-my-first-php-router"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/how-i-implemented-my-first-php-router"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/how-i-implemented-my-first-php-router"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>

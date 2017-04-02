@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="Since Android 6.0 the Apache HTTP Client was deprecated. This is how you can write an Android REST Client using the HttpURLConnection." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Android REST Client</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2016-04-22">22 Apr 2016</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/android">#android</a>
+    
+        <a href="/tag/rest">#rest</a>
+    
+        <a href="/tag/http">#http</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2016-04-22">22 Apr 2016</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">Android REST Client</h1> -->
+
+        <section class="post-content">
+            <p>When you develop an Android application that should talk to a server you often have to consume a REST API. There are some ways how you can do that. In the following post I will show you how the way recommended by the Android docs works.</p>
+
+<p>Until Android 6.0 (which is API level 23) you could use the Apache HTTP Client. However since Android 6.0 this API isn’t supported anymore by default. Instead they suggest to use the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html">HttpURLConnection</a> .</p>
+
+<p>The reason for this change is that the HttpURLConnection API is more efficient and more transparent to use as stated <a href="http://developer.android.com/about/versions/marshmallow/android-6.0-changes.html#behavior-apache-http-client">here</a>.</p>
+
+<p>The HttpURLConnection API has a good documentation. It might be a little hard to figure everything out at first, though.</p>
+
+<h2 id="get-request">GET Request</h2>
+<p>Retrieving a resource via an Http <code class="highlighter-rouge">GET</code> is the easiest use case. The following code listing (taken and adapted from the official documentation) will show you how.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Object</span> <span class="nf">getResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// do something with the stream and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span></code></pre></figure>
+
+<h2 id="post-request">POST Request</h2>
+<p>Posting an object to a REST API is very similar to the <code class="highlighter-rouge">GET</code> request. The only thing you have to do additionally is to set the <a href="http://developer.android.com/reference/java/net/URLConnection.html#setDoOutput(boolean)"><code class="highlighter-rouge">setDoOutput(boolean)</code></a> method to true.</p>
+
+<p>Also you should set the size of the object you want to send. This can either be done with the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html#setChunkedStreamingMode(int)"><code class="highlighter-rouge">setChunkedStreamingMode(int)</code></a> or the <a href="http://developer.android.com/reference/java/net/HttpURLConnection.html#setFixedLengthStreamingMode(int)"><code class="highlighter-rouge">setFixedLengthStreamingMode(int)</code></a> method. Which method to use depends whether you know the size of the object to send or not.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Object</span> <span class="nf">postResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">,</span> <span class="n">Object</span> <span class="n">objectToPost</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+    <span class="c1">// this makes the urlConnection a POST request</span>
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="c1">// you should set the size of the object you want to send.</span>
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setChunkedStreamingMode</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span> <span class="c1">// alternatively you can also use the setFixedLengthStreamingMode(int) method</span>
+
+    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+    <span class="c1">// write the object to the out stream</span>
+
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// read the result from the server and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span></code></pre></figure>
+
+<h2 id="put-request">PUT Request</h2>
+<p>The <code class="highlighter-rouge">PUT</code> request is very similar to the <code class="highlighter-rouge">POST</code> request. The only difference is that you have to set the request method to <code class="highlighter-rouge">PUT</code>. All the other options are the same.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Object</span> <span class="nf">putResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">,</span> <span class="n">Object</span> <span class="n">objectToPut</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+    <span class="n">urlConnection</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+    <span class="c1">// set the request method to PUT</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"PUT"</span><span class="o">);</span>
+
+    <span class="c1">// set the stream size</span>
+
+    <span class="n">OutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedOutputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
+    <span class="c1">// write to objectToPut to the output stream</span>
+
+    <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedInputStream</span><span class="o">(</span><span class="n">urlConnection</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">());</span>
+    <span class="c1">// read the result from the server and set result</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="n">result</span><span class="o">;</span></code></pre></figure>
+
+<h2 id="delete-request">DELETE Request</h2>
+<p>As for the <code class="highlighter-rouge">PUT</code> request you also have to set the request method for the <code class="highlighter-rouge">DELETE</code> request explicitly. To execute the request you have to call the <code class="highlighter-rouge">getResponseCode()</code> method.</p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">deleteResource</span><span class="o">(</span><span class="n">String</span> <span class="n">resourceUrl</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="n">resourceUrl</span><span class="o">);</span>
+  <span class="n">HttpURLConnection</span> <span class="n">urlConnection</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+  <span class="k">try</span> <span class="o">{</span>
+    <span class="n">urlConnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
+
+    <span class="c1">// set the request method to DELETE</span>
+    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"DELETE"</span><span class="o">);</span>
+
+    <span class="c1">// get the result</span>
+    <span class="k">return</span> <span class="n">connection</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">==</span> <span class="mi">200</span><span class="o">;</span>
+  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// react to the exception</span>
+  <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">urlConnection</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">urlConnection</span><span class="o">.</span><span class="na">disconnect</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="o">;</span></code></pre></figure>
+
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=Android REST Client&amp;url=http://markusvieghofer.at/android-rest-client"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/android-rest-client"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/android-rest-client"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>

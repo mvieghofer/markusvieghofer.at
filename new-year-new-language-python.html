@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>markusvieghofer.at - Software made in Österreich</title>
+    <meta name="description" content="My name is Markus Vieghofer and I'm an experienced Java developer located in Austria. I write about Java, Android and other technology stuff." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Customisation  -->
+    
+
+    <!-- favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <link id="atf" data-btf="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400;//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+
+</head>
+<body class="home-template">
+
+    <header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">New Year, New Language - Python</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-01-27">27 Jan 2015</time>
+                <div class="tagsContainer">
+    
+        <a href="/tag/programming">#programming</a>
+    
+        <a href="/tag/programming-language">#programming-language</a>
+    
+        <a href="/tag/python">#python</a>
+    
+</div>
+
+            </section>
+        </header>
+
+<!--         <header class="post-header">
+            <a id="blog-logo" href="http://markusvieghofer.at">
+                
+                    <span class="blog-title">markusvieghofer.at</span>
+                
+            </a>
+        </header> -->
+
+        <!-- <span class="post-meta">
+            <time datetime="2015-01-27">27 Jan 2015</time>
+            
+        </span> -->
+
+        <!-- <h1 class="post-title">New Year, New Language - Python</h1> -->
+
+        <section class="post-content">
+            <p>I’ve decided to learn a new programming language this year. It’s going to be Python.</p>
+
+<p>Why Python you ask?</p>
+
+<p>It’s something new, kind of different than Java (the programming language I currently work with) and provides some awesome features. This is my current top 5 list of Python features.</p>
+
+<p>It is…</p>
+
+<h1 id="dynamically-typed">1. Dynamically Typed</h1>
+
+<p>Python is dynamically typed whereas Java is statically typed. The difference between the two type system is that Java determines the type at compile time and Python at runtime.</p>
+
+<p>This makes Python a lot more flexible. You don’t have to define the type of a variable, Python infers it from the variables value.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">myInt</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">myString</span> <span class="o">=</span> <span class="s">"test string"</span></code></pre></figure>
+
+<p>Although Python is dynamically typed it is still is strongly typed. This means a variable that holds a string value will always be of the type string. You cannot modify type of a string by e.g. adding a number to it.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">myVar</span> <span class="o">=</span> <span class="s">"test"</span>
+
+    <span class="c"># this works</span>
+    <span class="n">myVar</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">myVar</span> <span class="o">+=</span> <span class="mi">10</span>
+
+    <span class="c">#this doesn't work</span>
+    <span class="k">print</span> <span class="s">"test"</span> <span class="o">+</span> <span class="n">myVar</span></code></pre></figure>
+
+<h1 id="list-functions">2. List Functions</h1>
+
+<p>Python provides some awesome list functions. This is one of the most powerful features of Python.</p>
+
+<p>You can easily define a list.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span></code></pre></figure>
+
+<p>You can also apply a lot of functions on lists.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="nb">list</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span> <span class="c"># list = [1, 2, 3, 4, 5, 6]</span>
+    <span class="nb">list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c"># prints [3, 4]</span>
+    <span class="nb">list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># prints [6], this feature is really awesome!!</span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c"># list = [1, 2, 3, 5, 6]</span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span> <span class="c"># list = [1, 17, 2, 3, 5, 6]</span>
+    <span class="n">element</span> <span class="o">=</span> <span class="nb">list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># element = 6, list = [1, 17, 2, 3, 5]</span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c"># list = [5, 3, 2, 17, 1]</span>
+    <span class="nb">list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c"># list = [1, 2, 3, 5, 17]</span></code></pre></figure>
+
+<p>However, the coolest feature for lists is that you can apply functions directly on lists (and all its items). You can use this to modify all elements in a certain list. And you do all this in one line.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test2</span><span class="p">():</span>
+    <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="n">doubleList</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">]</span>
+    <span class="c"># doubleList = [2, 4, 6, 8]</span></code></pre></figure>
+
+<h1 id="named-arguments">3. Named Arguments</h1>
+
+<p>You can define named arguments for methods and set default values for them. Later, when you invoke the method you can set the values of the arguments by name.</p>
+
+<p>This allows you to use certain default values and only pass the necessary values to the method.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">stringArg</span><span class="p">,</span> <span class="n">intArg</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">booleanArg</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">stringArg</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intArg</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">stringArg</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intArg</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="n">booleanArg</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">intArg</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></code></pre></figure>
+
+<h1 id="readability">4. Readability</h1>
+
+<p>Python is really easy to read. There isn’t any clutter, nearly nothing that isn’t absolutely necessary.</p>
+
+<p>Differently than Java, which uses curly braces for defining blocks, Python programs use intention for doing that. This also means, that most Python programs will look similar.</p>
+
+<p>Therefore it is easy for developers to read any Python program by any developer. You will probably agree with me that this is one of the most important features of any programming language.</p>
+
+<h1 id="purely-object-oriented">5. Purely Object Oriented</h1>
+
+<p>In Python everything is an object. There are no primitive data types as in Java.</p>
+
+<p>Even though it doesn’t change the basic programming principle it makes Python differently from Java. I wanted to learn a purely object oriented language for once. Therefore Python seems to be a very good fit.</p>
+
+        </section>
+
+        
+
+        <footer class="post-footer">
+            <!-- If we want to display author's name and bio -->
+            
+                <figure class="author-image">
+                    <a class="img" href="/" style="background-image: url(/assets/images/profile.jpg)">
+                    <span class="hidden">Markus Vieghofer's Picture</span></a>
+                </figure>
+                <div class="author-image-line"></div>
+                <section class="author">
+                    <!-- Author Name -->
+                    <h4> Markus Vieghofer </h4>
+                    <!-- Author Bio -->
+                    <p>
+                        I love developing software. Most of the time I stick with Java and Android but I also try something new from time to time. I'm  also on <a href='https://twitter.com/mvieghofer' target='_blank'>Twitter</a> and <a href='https://github.com/mvieghofer' target='_blank'>Github</a>.
+                    </p>
+                </section>
+            
+
+            <!-- Share links section -->
+            <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?text=New Year, New Language - Python&amp;url=http://markusvieghofer.at/new-year-new-language-python"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://markusvieghofer.at/new-year-new-language-python"
+        onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://markusvieghofer.at/new-year-new-language-python"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
+
+            <!-- Disqus comments -->
+            
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+
+        var disqus_shortname = 'markusvieghofer-at'; 
+        var disqus_developer = 0; // developer mode is on
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            
+
+        </footer>
+
+    </article>
+
+</main>
+
+    <footer class="site-footer clearfix">
+      <section class="copyright">
+        <a href="/">markusvieghofer.at</a> &copy;
+              2017 &bull; All rights reserved.
+      </section>
+      <section class="poweredby">Made with Jekyll using
+        <a href="http://github.com/rosario/kasper">Kasper theme</a>
+      </section>
+    </footer>
+
+    <script type="text/javascript" src="/assets/js/btf.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Google Analytics Tracking code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-83732990-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#27ae60",
+          "text": "#000000"
+        },
+        "button": {
+          "background": "transparent",
+          "text": "#454545",
+          "border": "#454545"
+        }
+      }
+    })});
+    </script>
+</body>
+</html>
